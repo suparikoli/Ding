@@ -1,0 +1,135 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{sales_representative}-fr{planned_from}to{planned_to}-{#}",
+ "creation": "2024-04-18 20:31:02.420990",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "preliminary_details_section",
+  "sales_representative",
+  "planned_from",
+  "planned_to",
+  "column_break_fdhn",
+  "territory",
+  "agenda",
+  "campaign",
+  "locations_to_visit_section",
+  "suspect_list",
+  "lead_list",
+  "customer_list",
+  "section_break_dmwv",
+  "geolocation_list"
+ ],
+ "fields": [
+  {
+   "fieldname": "preliminary_details_section",
+   "fieldtype": "Section Break",
+   "label": "Preliminary Details"
+  },
+  {
+   "fieldname": "sales_representative",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Sales Representative",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "planned_from",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Planned From",
+   "reqd": 1
+  },
+  {
+   "fieldname": "planned_to",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Planned To",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_fdhn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "territory",
+   "fieldtype": "Link",
+   "label": "Territory",
+   "options": "Territory",
+   "reqd": 1
+  },
+  {
+   "fieldname": "agenda",
+   "fieldtype": "Data",
+   "label": "Agenda"
+  },
+  {
+   "fieldname": "campaign",
+   "fieldtype": "Data",
+   "label": "Campaign"
+  },
+  {
+   "fieldname": "locations_to_visit_section",
+   "fieldtype": "Section Break",
+   "label": "Locations To Visit"
+  },
+  {
+   "columns": 11,
+   "fieldname": "suspect_list",
+   "fieldtype": "Table",
+   "label": "Suspect List",
+   "options": "Field Visit Suspect Locations"
+  },
+  {
+   "columns": 11,
+   "fieldname": "lead_list",
+   "fieldtype": "Table",
+   "label": "Lead List",
+   "options": "Field Visit Lead Locations"
+  },
+  {
+   "columns": 11,
+   "fieldname": "customer_list",
+   "fieldtype": "Table",
+   "label": "Customer List",
+   "options": "Field Visit Customer Locations"
+  },
+  {
+   "fieldname": "section_break_dmwv",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "geolocation_list",
+   "fieldtype": "Text",
+   "label": "Geolocation list",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-04-22 10:36:01.207369",
+ "modified_by": "Administrator",
+ "module": "Field Sales",
+ "name": "Field Visit Route Planning",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

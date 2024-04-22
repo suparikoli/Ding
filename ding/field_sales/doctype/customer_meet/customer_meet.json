@@ -1,0 +1,122 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{DD}-{MM}-{YY}-{customer}-{creator}:{###}",
+ "creation": "2024-04-18 14:44:48.568487",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "creator",
+  "customer",
+  "customer_location",
+  "logged_geo_location",
+  "distance",
+  "check_in_time",
+  "check_out_time",
+  "duration",
+  "comment",
+  "rate_meeting"
+ ],
+ "fields": [
+  {
+   "bold": 1,
+   "fieldname": "creator",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Sales Representative",
+   "options": "User",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "customer.customer_geolocation",
+   "fieldname": "customer_location",
+   "fieldtype": "Data",
+   "label": "Customer Location",
+   "read_only": 1
+  },
+  {
+   "fieldname": "logged_geo_location",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Logged Geo Location",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "distance",
+   "fieldtype": "Data",
+   "label": "Distance from Customer in Kilometers",
+   "read_only": 1
+  },
+  {
+   "fieldname": "check_in_time",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Check In Time",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "check_out_time",
+   "fieldtype": "Data",
+   "label": "Check Out Time",
+   "read_only": 1
+  },
+  {
+   "fieldname": "duration",
+   "fieldtype": "Data",
+   "label": "Duration",
+   "read_only": 1
+  },
+  {
+   "fieldname": "comment",
+   "fieldtype": "Long Text",
+   "label": "Comment"
+  },
+  {
+   "fieldname": "rate_meeting",
+   "fieldtype": "Rating",
+   "label": " Rate Meeting"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-04-22 10:34:17.655182",
+ "modified_by": "Administrator",
+ "module": "Field Sales",
+ "name": "Customer Meet",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

@@ -1,0 +1,56 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "hash",
+ "creation": "2024-04-18 20:24:15.122871",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "lead",
+  "lead_location",
+  "rendezvous"
+ ],
+ "fields": [
+  {
+   "columns": 2,
+   "fieldname": "lead",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Lead",
+   "options": "Lead",
+   "reqd": 1
+  },
+  {
+   "columns": 3,
+   "fetch_from": "lead.custom_lead_geolocation",
+   "fieldname": "lead_location",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Lead Location",
+   "read_only": 1
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "rendezvous",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Rendezvous"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-04-22 10:34:40.071682",
+ "modified_by": "Administrator",
+ "module": "Field Sales",
+ "name": "Field Visit Lead Locations",
+ "naming_rule": "Random",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

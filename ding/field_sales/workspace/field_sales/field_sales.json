@@ -1,0 +1,78 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"wxDlZxmyWB\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Field Sales</span>\",\"col\":12}},{\"id\":\"pDyUPVP-J4\",\"type\":\"card\",\"data\":{\"card_name\":\"Meeting Doctypes\",\"col\":4}},{\"id\":\"zmxf6RC-eA\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Route Planning\",\"col\":3}},{\"id\":\"96burDTnak\",\"type\":\"spacer\",\"data\":{\"col\":12}}]",
+ "creation": "2024-04-18 17:14:08.813735",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "map",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "Field Sales",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Meeting Doctypes",
+   "link_count": 3,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Suspect Meet",
+   "link_count": 0,
+   "link_to": "Suspect Meet",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Lead Meet",
+   "link_count": 0,
+   "link_to": "Lead Meet",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Customer Meet",
+   "link_count": 0,
+   "link_to": "Customer Meet",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2024-04-22 10:59:02.598978",
+ "modified_by": "Administrator",
+ "module": "Field Sales",
+ "name": "Field Sales",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 39.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Route Planning",
+   "link_to": "Field Visit Route Planning",
+   "stats_filter": "[]",
+   "type": "DocType"
+  }
+ ],
+ "title": "Field Sales"
+}
