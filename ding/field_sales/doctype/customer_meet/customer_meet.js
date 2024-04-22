@@ -149,4 +149,3 @@ function isValidLatLong(location) {
     var latLongPattern = /^-?\d+(\.\d+)?,-?\d+(\.\d+)?$/;
     return latLongPattern.test(location);
 }
-
