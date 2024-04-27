@@ -20,5 +20,33 @@ frappe.ui.form.on('Ding Call Logs', {
         var duration = moment.duration(end_time.diff(start_time));
         var durationFormatted = moment.utc(duration.asMilliseconds()).format('mm:ss');
         frm.set_value('duration', durationFormatted);
+    },
+
+    refresh: function(frm) {
+        // Check if mobile_number is present in the lead doctype
+        if (frm.doc.mobile_no) {
+            frm.add_custom_button(__('Ding Mobile'), function() {
+                // Play the sound
+                playNotificationSound();
+                // Trigger the call without opening a new tab
+                window.location.href = 'tel:' + frm.doc.mobile_no;
+            });
+        }
+
+        // Check if phone is present in the doctype
+        if (frm.doc.phone) {
+            frm.add_custom_button(__('Ding Phone'), function() {
+                // Play the sound
+                playNotificationSound();
+                // Trigger the call without opening a new tab
+                window.location.href = 'tel:' + frm.doc.phone;
+            });
+        }
     }
 });
+
+// Function to play the notification sound
+function playNotificationSound() {
+    var audio = new Audio('public/ding.mp3');
+    audio.play();
+}
