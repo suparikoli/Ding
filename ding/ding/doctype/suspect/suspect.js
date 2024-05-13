@@ -1,14 +1,5 @@
-// Copyright (c) 2024, manoj and contributors
-// For license information, please see license.txt
-
 frappe.ui.form.on('Suspect', {
-    refresh: function(frm) {
-        // Add custom button to create CallLog document
-        frm.add_custom_button(__('CallLog'), function() {
-            // Create the Ding Call Logs document
-            createDingCallLogs(frm.doc.name, frm.doc.mobile_no, frm.doc.phone);
-        });
-
+    refresh: function (frm) {
         // Function to create Ding Call Logs document
         function createDingCallLogs(suspectName, mobileNo, phoneNo) {
             var new_log = frappe.model.get_new_doc('Ding Call Logs');
@@ -22,51 +13,73 @@ frappe.ui.form.on('Suspect', {
             frappe.set_route('Form', 'Ding Call Logs', new_log.name);
         }
 
-        // Check if mobile_number is present in the lead doctype
-        if (frm.doc.mobile_no) {
-            frm.add_custom_button(__('Ding Mobile'), function() {
-                // Play the sound
-                playNotificationSound();
-                // Trigger the call without opening a new tab
-                window.location.href = 'tel:' + frm.doc.mobile_no;
+        // Check if it's a new document
+        var isNewDocument = frm.doc.__islocal;
+
+        // Check if either mobile_no or phone is missing and it's not a new document
+        if (!isNewDocument && (!frm.doc.mobile_no && !frm.doc.phone)) {
+            // Display alert if both are missing and it's not a new document
+            frappe.msgprint("Phone and Mobile number are missing. Ding can't place calls.");
+        } else if (!isNewDocument) {
+            // Add custom button with phone icon to create CallLog document if at least one is present and it's not a new document
+            frm.add_custom_button('<i class="fa fa-phone"></i> Ding', function () {
+                // Create the Ding Call Logs document if it's not a new document
+                createDingCallLogs(frm.doc.name, frm.doc.mobile_no, frm.doc.phone);
             });
         }
 
-        // Check if phone is present in the doctype
-        if (frm.doc.phone) {
-            frm.add_custom_button(__('Ding Phone'), function() {
-                // Play the sound
-                playNotificationSound();
-                // Trigger the call without opening a new tab
-                window.location.href = 'tel:' + frm.doc.phone;
-            });
-        }
+        // Check if suspect_geolocation field is empty or null and it's not a new document
+        var hasLocation = frm.doc.suspect_geolocation;
+        if (!isNewDocument) {
+            // Add custom button to create Suspect Meet document if location is present and it's not a new document
+            if (hasLocation) {
+                frm.add_custom_button(__('Field Meet'), function () {
+                    frappe.new_doc('Suspect Meet', {
+                        suspect: frm.doc.name
+                    });
+                });
+            } else {
+                // If geolocation is missing and it's not a new document, show a message and log the suspect
+                frappe.msgprint("Suspect Location Missing. Ding Field Meet not available.");
+                // Log the suspect here
+            }
 
-        // Function to play the notification sound
-        function playNotificationSound() {
-            var audio = new Audio('https://e15.justsigns.co.in/files/callsound.mp3');
-            audio.play();
-        }
-
-        // Add custom button to create Suspect Meet document
-        frm.add_custom_button(__('Meet'), function() {
-            frappe.new_doc('Suspect Meet', {
-                suspect: frm.doc.name
-            });
-        });
-
-        // Add custom button to log location
-        frm.add_custom_button(__('Add Location'), function() {
-            frappe.confirm(__('Do you want to log your current location?'), function() {
-                // Get user's current location and add it to custom_suspect_geolocation
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    var latitude = position.coords.latitude;
-                    var longitude = position.coords.longitude;
-                    var geolocation = latitude + ',' + longitude;
-                    frm.set_value('custom_suspect_geolocation', geolocation);
-                    frappe.msgprint(__('Location logged successfully.'));
+            // Add custom button to log or update location based on whether location is present or not and it's not a new document
+            frm.add_custom_button(hasLocation ? __('Update Location') : __('Add Missing GeoLocation'), function () {
+                // If location is present, confirm update; otherwise, confirm add
+                frappe.confirm(hasLocation ? __('Do you want to update your current location?') : __('Do you want to log your current location?'), function () {
+                    // Get user's current location and update or add it to suspect_geolocation
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        var latitude = position.coords.latitude;
+                        var longitude = position.coords.longitude;
+                        var geolocation = latitude + ',' + longitude;
+                        frm.set_value('suspect_geolocation', geolocation);
+                        frappe.msgprint(hasLocation ? __('Location updated successfully.') : __('Location logged successfully.'));
+                    });
                 });
             });
-        });
+        }
+        // End of custom button to log location
+
+        // Check if status is 'Converted' and it's not a new document
+        if (!isNewDocument && frm.doc.status === 'Converted') {
+            // Disable all fields in the form if status is 'Converted' and it's not a new document
+            frm.fields.forEach(function (field) {
+                field.df.read_only = 1;
+                field.refresh();
+            });
+            // Hide the 'Save' button if status is 'Converted' and it's not a new document
+            frm.disable_save();
+            // Inform the user
+            frappe.msgprint('Suspect has been converted. Editing is disabled by Ding.');
+        } else {
+            // Enable all fields in the form if status is not 'Converted' or if it's a new document
+            frm.fields.forEach(function (field) {
+                field.df.read_only = 0;
+                field.refresh();
+            });
+            // Show the 'Save' button if status is not 'Converted' or if it's a new document
+            frm.enable_save();
+        }
     }
 });

@@ -47,7 +47,7 @@
   "fax",
   "address_section",
   "address_html",
-  "custom_suspect_geolocation",
+  "suspect_geolocation",
   "column_break_38",
   "city",
   "state",
@@ -513,7 +513,7 @@
    "show_dashboard": 1
   },
   {
-   "fieldname": "custom_suspect_geolocation",
+   "fieldname": "suspect_geolocation",
    "fieldtype": "Data",
    "label": "Suspect Geolocation"
   }
@@ -521,7 +521,7 @@
  "icon": "fa fa-user",
  "image_field": "image",
  "links": [],
- "modified": "2024-05-13 13:03:47.066697",
+ "modified": "2024-05-13 21:24:05.264678",
  "modified_by": "Administrator",
  "module": "ding",
  "name": "Suspect",
