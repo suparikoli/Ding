@@ -93,6 +93,15 @@ function updateGeolocationList(frm) {
             }
         });
     }
+    
+    // Fetch lat,long data from Field Visit Contact Locations
+    if (frm.doc['contact_list']) {
+        $.each(frm.doc['contact_list'], function(i, row) {
+            if (row.contact_location) {
+                geolocationList.push(row.contact_location);
+            }
+        });
+    }
 
     // Join the array elements with '|' separator
     var updatedGeolocationList = geolocationList.join('|');

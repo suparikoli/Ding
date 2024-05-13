@@ -32,7 +32,7 @@ app_license = "mit"
 doctype_js = {
     "Customer": "public/js/customer.js",
     "Lead": "public/js/lead.js",
-    "Suspect": "public/js/suspect.js",
+    "Contact": "public/js/contact.js",
 }
 
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
@@ -74,7 +74,7 @@ doctype_js = {
 # ------------
 
 # before_install = "ding.install.before_install"
-# after_install = "ding.install.after_install"
+after_install = "ding.install.add_custom_fields"
 
 # Uninstallation
 # ------------

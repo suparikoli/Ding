@@ -1,17 +1,18 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:{DD}-{MM}-{YY}-{suspect}-{creator}:{###}",
- "creation": "2024-04-22 11:22:54.447005",
+ "autoname": "format:{DD}-{MM}-{YY}-{contact}-{creator}:{###}",
+ "creation": "2024-05-13 14:26:19.581566",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
   "creator",
-  "lead",
-  "lead_location",
+  "contact",
+  "contact_location",
   "logged_geo_location",
+  "contact_company",
   "distance",
   "check_in_time",
   "check_out_time",
@@ -78,27 +79,34 @@
    "label": " Rate Meeting"
   },
   {
-   "fieldname": "lead",
+   "fieldname": "contact",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Lead",
-   "options": "Lead",
+   "label": "Contact",
+   "options": "Contact",
    "reqd": 1
   },
   {
-   "fetch_from": "lead.lead_geolocation",
-   "fieldname": "lead_location",
+   "fetch_from": "contact.contact_geolocation",
+   "fieldname": "contact_location",
    "fieldtype": "Data",
-   "label": "Lead Location",
+   "label": "Contact Location",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "contact.company_name",
+   "fieldname": "contact_company",
+   "fieldtype": "Data",
+   "label": "Contact Company",
    "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-05-13 15:55:22.278866",
+ "modified": "2024-05-13 14:29:21.346966",
  "modified_by": "Administrator",
  "module": "Field Sales",
- "name": "Lead Meet",
+ "name": "Contact Meet",
  "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [

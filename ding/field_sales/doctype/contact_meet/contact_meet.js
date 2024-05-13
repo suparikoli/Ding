@@ -1,7 +1,7 @@
 // Copyright (c) 2024, manoj and contributors
 // For license information, please see license.txt
 
-frappe.ui.form.on('Lead Meet', {
+frappe.ui.form.on('Contact Meet', {
     onload: function(frm) {
         // Make the Data fields visible
         frm.toggle_display(['check_in_time', 'check_out_time', 'duration', 'creator'], true);
@@ -26,12 +26,12 @@ frappe.ui.form.on('Lead Meet', {
 
         // Add "Get Directions" button
         frm.add_custom_button(__('Get Directions'), function() {
-            var leadLocation = frm.doc.lead_location;
-            if (isValidLatLong(leadLocation)) {
-                var googleMapsUrl = 'https://www.google.com/maps?q=' + encodeURIComponent(leadLocation);
+            var contactLocation = frm.doc.contact_location;
+            if (isValidLatLong(contactLocation)) {
+                var googleMapsUrl = 'https://www.google.com/maps?q=' + encodeURIComponent(contactLocation);
                 window.open(googleMapsUrl, '_blank');
             } else {
-                frappe.msgprint(__('Invalid lead Location.'));
+                frappe.msgprint(__('Invalid contact Location.'));
             }
         });
 
@@ -55,22 +55,22 @@ frappe.ui.form.on('Lead Meet', {
             }
         });
 
-        // Add "Update lead Location" button
-        frm.add_custom_button(__('Update lead Location'), function() {
-            var leadLocation = frm.doc.lead_geolocation;
-            if (!leadLocation || !isValidLatLong(leadLocation)) {
-                var leadName = frm.doc.lead;
-                if (leadName) {
-                    var leadUrl = frappe.urllib.get_base_url() + '/app/lead/' + leadName;
-                    window.open(leadUrl, '_blank');
+        // Add "Update contact Location" button
+        frm.add_custom_button(__('Update contact Location'), function() {
+            var contactLocation = frm.doc.contact_geolocation;
+            if (!contactLocation || !isValidLatLong(contactLocation)) {
+                var contactName = frm.doc.contact;
+                if (contactName) {
+                    var contactUrl = frappe.urllib.get_base_url() + '/app/contact/' + contactName;
+                    window.open(contactUrl, '_blank');
                 } else {
-                    frappe.msgprint(__('Please select a lead.'));
+                    frappe.msgprint(__('Please select a contact.'));
                 }
             }
         });
     },
 
-    lead_geolocation: function(frm) {
+    contact_geolocation: function(frm) {
         calculateAndSetDistance(frm);
     },
 
@@ -98,10 +98,10 @@ function calculateTimeDifference(endTime, startTime) {
 }
 
 function calculateAndSetDistance(frm) {
-    var leadLocation = frm.doc.lead_geolocation;
+    var contactLocation = frm.doc.contact_geolocation;
     var loggedGeoLocation = frm.doc.logged_geo_location;
-    if (leadLocation && loggedGeoLocation) {
-        var distance = calculateDistance(leadLocation, loggedGeoLocation);
+    if (contactLocation && loggedGeoLocation) {
+        var distance = calculateDistance(contactLocation, loggedGeoLocation);
         frm.set_value('distance', distance);
     }
 }
