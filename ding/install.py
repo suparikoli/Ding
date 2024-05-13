@@ -13,7 +13,7 @@ def add_custom_fields():
         {
             "dt": "Lead",
             "label": "Lead GeoLocation",
-            "fieldname": "custom_lead_geolocation",
+            "fieldname": "lead_geolocation",
             "fieldtype": "Data",
             "insert_after": "address_html",
             "module": "ding"
@@ -26,7 +26,6 @@ def add_custom_fields():
             "insert_after": "address",
             "module": "ding"
         }
-        # Add more custom fields as needed
     ]
 
     for field_data in custom_fields:
