@@ -25,19 +25,20 @@ frappe.ui.form.on('Customer Meet', {
             });
         });
 
-
+        
 
         // Add POS button
         frm.add_custom_button(__('POS'), function() {
             // Open POS URL with customer prefilled
             var customer = frm.doc.customer;
             if (customer) {
-                var posUrl = `https://e15.justsigns.co.in/app/point-of-sale?customer=${encodeURIComponent(customer)}`;
+                var posUrl = `${frappe.urllib.get_base_url()}/app/point-of-sale?customer=${encodeURIComponent(customer)}`;
                 window.open(posUrl, '_blank');
             } else {
                 frappe.msgprint(__('Please select a customer.'));
             }
         });
+
 
         // Add "Get Directions" button
         frm.add_custom_button(__('Get Directions'), function() {
