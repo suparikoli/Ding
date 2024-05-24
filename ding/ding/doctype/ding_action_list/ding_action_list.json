@@ -1,0 +1,50 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "hash",
+ "creation": "2024-05-24 18:26:22.510636",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "action_taken",
+  "description",
+  "taken"
+ ],
+ "fields": [
+  {
+   "columns": 3,
+   "fieldname": "action_taken",
+   "fieldtype": "Select",
+   "label": "Action Taken",
+   "options": "Added to DNC Campaign\nAdded to Nurture Campaign\nAddressed Concerns and Complaints\nAttempted Callback\nAttempted Callback Again\nAttempted Callback with Alternative Number\nAttempted Callback with Correct Number\nCatalogue Shared\nCompetitor Preferred\nContract Signed\nDecision Deferred\nDemo Scheduled\nDiscussed Customization Requirements\nDiscussed Renewal Benefits\nDiscussed Upgrade Options\nEscalated to Customer Support Team\nFollow-up Call Scheduled\nFollow-up Meeting Scheduled\nIdentified Language Preference\nMarked as DNC\nMarked as Not Qualified\nMarked as Out of Service Area\nMarked for Future Follow-up\nMarked Number as Invalid\nNo Budget Available\nNot Interested\nNoted Best Time to Call\nNoted Budget Limitations\nNoted Competitor Details\nNoted Policy Constraints\nNoted Technical Concerns\nOffered Apology and Resolution\nOffered Compliance Solutions\nOffered Customization Pricing\nOffered Flexible Payment Options\nOffered Free Trial\nOffered Special Incentives to Switch\nOffered Technical Support\nOffered Translation Services\nOffered Trial Period\nOrder Placed\nPricing Details Shared\nProduct Brochure Sent\nProduct Details Shared via Email\nProduct Images Sent via Email\nProduct Images Sent via WhatsApp\nProduct Information Shared via Email\nProvided Additional Information\nProvided Basic Package Information\nProvided Budget-Friendly Alternatives\nProvided Case Studies\nProvided Compensation or Refund\nProvided Contact Details of Decision Maker\nProvided Customization Portfolio\nProvided Differentiating Information\nProvided Information in Preferred Language\nProvided Policy Clarifications\nProvided Referral to Partner or Associate in Service Area\nProvided Technical Documentation\nQuotation Provided\nRemoved from Immediate Follow-up List\nRemoved from Sales Pipeline\nRescheduled Call\nSample Sent\nScheduled Callback\nScheduled Customization Consultation\nScheduled Follow-up Call\nScheduled Follow-up Call to Ensure Satisfaction\nScheduled Follow-up Call to Reassess\nScheduled Follow-up Call to Revisit Budget\nScheduled Follow-up Call with Legal Team\nScheduled Follow-up Call with Translator\nScheduled Follow-up Meeting\nScheduled Follow-up Meeting for Demo\nScheduled Follow-up Meeting for Renewal\nScheduled Follow-up Meeting with Decision Maker\nScheduled Technical Discussion\nSent Additional Resources\nSent Confirmation Email\nSent Confirmation SMS\nSent Confirmation WhatsApp Message\nSent Detailed Product Information\nSent Detailed Proposal for Review\nSent DNC Confirmation Email\nSent DNC Confirmation SMS\nSent DNC Confirmation WhatsApp Message\nSent Follow-up Email\nSent Follow-up Email for Confirmation\nSent Follow-up Email for Renewal\nSent Follow-up Email in Preferred Language\nSent Follow-up Email to Decision Maker\nSent Follow-up Email to Inquire Reason for No Interest\nSent Follow-up Email with Comparative Analysis\nSent Follow-up Email with Cost-Saving Tips\nSent Follow-up Email with Customization Options\nSent Follow-up Email with Policy Options\nSent Follow-up Email with Referral Details\nSent Follow-up Email with Resolution Details\nSent Follow-up Email with Resources for Self-Education\nSent Follow-up Email with Technical Solutions\nSent Follow-up Email with Upgrade Information\nSent Follow-up SMS\nSent Follow-up SMS for Confirmation\nSent Follow-up SMS for Renewal\nSent Follow-up SMS in Preferred Language\nSent Follow-up SMS to Decision Maker\nSent Follow-up SMS to Inquire Reason for No Interest\nSent Follow-up SMS with Cost-Saving Tips\nSent Follow-up SMS with Customization Options\nSent Follow-up SMS with Policy Options\nSent Follow-up SMS with Referral Details\nSent Follow-up SMS with Resources for Self-Education\nSent Follow-up SMS with Technical Solutions\nSent Follow-up SMS with Upgrade Information\nSent Follow-up WhatsApp Message\nSent Follow-up WhatsApp Message for Confirmation\nSent Follow-up WhatsApp Message for Renewal\nSent Follow-up WhatsApp Message in Preferred Language\nSent Follow-up WhatsApp Message to Decision Maker\nSent Follow-up WhatsApp Message to Inquire Reason for No Interest\nSent Follow-up WhatsApp Message with Comparative Analysis\nSent Follow-up WhatsApp Message with Cost-Saving Tips\nSent Follow-up WhatsApp Message with Customization Options\nSent Follow-up WhatsApp Message with Policy Options\nSent Follow-up WhatsApp Message with Referral Details\nSent Follow-up WhatsApp Message with Resolution Details\nSent Follow-up WhatsApp Message with Resources for Self-Education\nSent Follow-up WhatsApp Message with Technical Solutions\nSent Follow-up WhatsApp Message with Upgrade Information\nSent Pricing Details for Upgrade\nSent Reminder\nSent Reminder for Callback\nSent Renewal Reminder\nSent Updated Proposal\nTrial Offer Provided\nUpdate Contact Details\nUpdate DNC List\nUpdated Contact Details\nUpdated Lead Details\nUpdated Lead Status to Not Qualified\nVerified Correct Contact Details\nVerify Number\nWill Consider in Future\nWrong Contact Person"
+  },
+  {
+   "columns": 6,
+   "fieldname": "description",
+   "fieldtype": "Long Text",
+   "label": "Description"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "taken",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Taken"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-05-24 20:42:37.449743",
+ "modified_by": "Administrator",
+ "module": "ding",
+ "name": "Ding Action List",
+ "naming_rule": "Random",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -9,7 +9,7 @@
  "engine": "InnoDB",
  "field_order": [
   "call_handler",
-  "status",
+  "disposition",
   "duration",
   "start_time",
   "reference_doctype",
@@ -21,7 +21,13 @@
   "recording_url",
   "end_time",
   "note",
-  "amended_from"
+  "amended_from",
+  "section_break_wklz",
+  "seasoned_sales_experts_section",
+  "action_post_call",
+  "action_package",
+  "relation_stage",
+  "action_taken_post_call"
  ],
  "fields": [
   {
@@ -38,12 +44,6 @@
    "read_only": 1,
    "reqd": 1,
    "set_only_once": 1
-  },
-  {
-   "fieldname": "status",
-   "fieldtype": "Select",
-   "label": "Status",
-   "options": "Initiated\nRinging\nIn Progress\nCompleted\nFailed\nBusy\nNo Answer\nQueued\nCanceled"
   },
   {
    "fieldname": "duration",
@@ -122,12 +122,56 @@
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
+  },
+  {
+   "fieldname": "disposition",
+   "fieldtype": "Select",
+   "label": "Disposition",
+   "options": "Successful\nExisting Customer - Upgrading Plan\nInterested but Needs More Information\nInterested & Wants to Proceed Slowly\nFollow-up Needed\nExisting Customer - Renewal Reminder\nNot Available Now. Call Later\nNeeds Approval from Higher Authority\nCallback Requested\nLeft Voicemail\nLanguage Barrier\nAlready Engaged with Competitor\nTechnical Objection\nBudget Constraints\nPolicy Restrictions\nSeeking Custom Solution\nClient Dissatisfaction\nUnsuccessful\nLost Opportunity - Reason Unknown\nNot Qualified\nNot Reachable\nBusy Line\nInvalid Number\nDo Not Call\nWrong Number\nNot in Service Area",
+   "reqd": 1
+  },
+  {
+   "fieldname": "action_package",
+   "fieldtype": "HTML",
+   "label": "Action Package",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_wklz",
+   "fieldtype": "Section Break",
+   "label": "Professional"
+  },
+  {
+   "columns": 10,
+   "fieldname": "action_taken_post_call",
+   "fieldtype": "Table",
+   "label": "Action Taken Post Call",
+   "options": "Ding Action List"
+  },
+  {
+   "fieldname": "relation_stage",
+   "fieldtype": "Select",
+   "label": "Relation Stage",
+   "options": "0. Bad relation needs rebuilding - Acknowledgment\n1. Initial Contact and Awareness - Acquaintance\n2. Identifying Common Goals - Understanding\n3. Building Initial Alignment - Cooperation\n4. Exploring Values - Synergy\n5. Establishing Trust and Rapport - Trustworthy\n6. Deepening Collaboration - Partnership\n7. Overcoming Challenges - Resilient\n8. Celebrating Successes - Supportive\n9. Continuous Growth - Progressive\n10. Long-term Commitment - Enduring"
+  },
+  {
+   "bold": 1,
+   "fieldname": "seasoned_sales_experts_section",
+   "fieldtype": "Heading",
+   "label": "SEASONED SALES EXPERTS SECTION",
+   "read_only": 1
+  },
+  {
+   "fieldname": "action_post_call",
+   "fieldtype": "Heading",
+   "label": "Action Post Call",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-04-22 00:09:42.887667",
+ "modified": "2024-05-24 20:39:12.640228",
  "modified_by": "Administrator",
  "module": "ding",
  "name": "Ding Call Logs",
