@@ -18,12 +18,14 @@ frappe.ui.form.on('Contact', {
 
         // Check if either mobile_no or phone is missing and it's not a new document
         if (!isNewDocument && (!frm.doc.mobile_no && !frm.doc.phone)) {
-            // Display alert if both are missing and it's not a new document
-            frappe.msgprint("Phone and Mobile number are missing. Ding can't place calls.");
+            // Display alert at the top
+            frappe.show_alert({
+                message: __("Phone and Mobile number are missing. Ding can't place calls."),
+                indicator: 'red'
+            });
         } else if (!isNewDocument) {
-            // Add custom button with phone icon to create CallLog document if at least one is present and it's not a new document
+            // Add custom button with phone icon to create CallLog document
             frm.add_custom_button('<i class="fa fa-phone"></i> Ding', function () {
-                // Create the Ding Call Logs document if it's not a new document
                 createDingCallLogs(frm.doc.name, frm.doc.mobile_no, frm.doc.phone);
             });
         }
@@ -31,7 +33,6 @@ frappe.ui.form.on('Contact', {
         // Check if contact_geolocation field is empty or null and it's not a new document
         var hasLocation = frm.doc.contact_geolocation;
         if (!isNewDocument) {
-            // Add custom button to create Contact Meet document if location is present and it's not a new document
             if (hasLocation) {
                 frm.add_custom_button(__('Field Meet'), function () {
                     frappe.new_doc('Contact Meet', {
@@ -39,26 +40,41 @@ frappe.ui.form.on('Contact', {
                     });
                 });
             } else {
-                // If geolocation is missing and it's not a new document, show a message and log the contact
-                frappe.msgprint("Contact Location Missing. Ding Field Meet not available.");
-                // Log the contact here
+                // Display alert at the top if geolocation is missing
+                frappe.show_alert({
+                    message: __("Contact Location Missing. Ding Field Meet not available."),
+                    indicator: 'orange'
+                });
             }
 
-            // Add custom button to log or update location based on whether location is present or not and it's not a new document
+            // Add custom button to log or update location
             frm.add_custom_button(hasLocation ? __('Update Location') : __('Add Missing GeoLocation'), function () {
-                // If location is present, confirm update; otherwise, confirm add
-                frappe.confirm(hasLocation ? __('Do you want to update your current location?') : __('Do you want to log your current location?'), function () {
-                    // Get user's current location and update or add it to contact_geolocation
-                    navigator.geolocation.getCurrentPosition(function (position) {
-                        var latitude = position.coords.latitude;
-                        var longitude = position.coords.longitude;
-                        var geolocation = latitude + ',' + longitude;
-                        frm.set_value('contact_geolocation', geolocation);
-                        frappe.msgprint(hasLocation ? __('Location updated successfully.') : __('Location logged successfully.'));
-                    });
-                });
+                frappe.confirm(
+                    hasLocation
+                        ? __('Do you want to update your current location?')
+                        : __('Do you want to log your current location?'),
+                    function () {
+                        navigator.geolocation.getCurrentPosition(function (position) {
+                            var latitude = position.coords.latitude;
+                            var longitude = position.coords.longitude;
+                            var geolocation = latitude + ',' + longitude;
+                            frm.set_value('contact_geolocation', geolocation);
+
+                            frappe.show_alert({
+                                message: hasLocation
+                                    ? __('Location updated successfully.')
+                                    : __('Location logged successfully.'),
+                                indicator: 'green'
+                            });
+                        }, function (error) {
+                            frappe.show_alert({
+                                message: __('Failed to fetch location. Please try again.'),
+                                indicator: 'red'
+                            });
+                        });
+                    }
+                );
             });
         }
-        // End of custom button to log location
     }
 });
