@@ -1,5 +1,5 @@
 frappe.ui.form.on('Lead', {
-    refresh: function (frm) {
+    refresh: function(frm) {
         // Function to create Ding Call Logs document
         function createDingCallLogs(leadName, mobileNo, phoneNo) {
             var new_log = frappe.model.get_new_doc('Ding Call Logs');
@@ -16,16 +16,23 @@ frappe.ui.form.on('Lead', {
         // Check if it's a new document
         var isNewDocument = frm.doc.__islocal;
 
+        // For new documents, ensure save is enabled and skip other checks
+        if (isNewDocument) {
+            frm.enable_save();
+            return;
+        }
+
+        // Existing functionality for saved documents
         // Check if either mobile_no or phone is missing
-        if (!isNewDocument && (!frm.doc.mobile_no && !frm.doc.phone)) {
+        if (!frm.doc.mobile_no && !frm.doc.phone) {
             // Display alert at the top
             frappe.show_alert({
                 message: __("Phone and Mobile number are missing. Ding can't place calls."),
                 indicator: 'red'
             });
-        } else if (!isNewDocument) {
+        } else {
             // Add custom button with phone icon to create CallLog document
-            frm.add_custom_button('<i class="fa fa-phone"></i> Ding', function () {
+            frm.add_custom_button(__('<i class="fa fa-phone"></i> Ding'), function() {
                 createDingCallLogs(frm.doc.name, frm.doc.mobile_no, frm.doc.phone);
             });
         }
@@ -33,54 +40,48 @@ frappe.ui.form.on('Lead', {
         // Check if lead_geolocation field is empty or null
         var hasLocation = frm.doc.lead_geolocation;
 
-        if (!isNewDocument) {
-            // Add custom button to create Lead Meet document if location is present
-            if (hasLocation) {
-                frm.add_custom_button(__('Field Meet'), function () {
-                    frappe.new_doc('Lead Meet', {
-                        lead: frm.doc.name
-                    });
+        // Add custom button to create Lead Meet document if location is present
+        if (hasLocation) {
+            frm.add_custom_button(__('Field Meet'), function() {
+                frappe.new_doc('Lead Meet', {
+                    lead: frm.doc.name
                 });
-            } else {
-                // Display alert at the top if geolocation is missing
-                frappe.show_alert({
-                    message: __("Lead Location Missing. Ding Field Meet not available."),
-                    indicator: 'orange'
-                });
-            }
-
-            // Add custom button to log or update location based on whether location is present
-            frm.add_custom_button(hasLocation ? __('Update Location') : __('Add Missing GeoLocation'), function () {
-                frappe.confirm(
-                    hasLocation
-                        ? __('Do you want to update your current location?')
-                        : __('Do you want to log your current location?'),
-                    function () {
-                        navigator.geolocation.getCurrentPosition(function (position) {
-                            var latitude = position.coords.latitude;
-                            var longitude = position.coords.longitude;
-                            var geolocation = latitude + ',' + longitude;
-                            frm.set_value('lead_geolocation', geolocation);
-
-                            frappe.show_alert({
-                                message: hasLocation
-                                    ? __('Location updated successfully.')
-                                    : __('Location logged successfully.'),
-                                indicator: 'green'
-                            });
-                        }, function (error) {
-                            frappe.show_alert({
-                                message: __('Failed to fetch location. Please try again.'),
-                                indicator: 'red'
-                            });
-                        });
-                    }
-                );
+            });
+        } else {
+            // Display alert at the top if geolocation is missing
+            frappe.show_alert({
+                message: __("Lead Location Missing. Ding Field Meet not available."),
+                indicator: 'orange'
             });
         }
 
+        // Add custom button to log or update location based on whether location is present
+        frm.add_custom_button(hasLocation ? __('Update Location') : __('Add Missing GeoLocation'), function() {
+            frappe.confirm(
+                hasLocation ? __('Do you want to update your current location?') : __('Do you want to log your current location?'),
+                function() {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        var latitude = position.coords.latitude;
+                        var longitude = position.coords.longitude;
+                        var geolocation = latitude + ',' + longitude;
+                        frm.set_value('lead_geolocation', geolocation);
+
+                        frappe.show_alert({
+                            message: hasLocation ? __('Location updated successfully.') : __('Location logged successfully.'),
+                            indicator: 'green'
+                        });
+                    }, function(error) {
+                        frappe.show_alert({
+                            message: __('Failed to fetch location. Please try again.'),
+                            indicator: 'red'
+                        });
+                    });
+                }
+            );
+        });
+
         // Check if status is 'Converted'
-        if (!isNewDocument && frm.doc.status === 'Converted') {
+        if (frm.doc.status === 'Converted') {
             // Disable all fields and hide 'Save' button
             frm.set_read_only();
             frm.disable_save();
