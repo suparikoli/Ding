@@ -36,10 +36,10 @@ frappe.ui.form.on('Customer', {
         if (!isNewDocument) {
             // Add custom button to create Customer Meet document if location is present
             if (hasLocation) {
-                frm.add_custom_button(__('Field Meet'), function () {
-                    frappe.new_doc('Customer Meet', {
-                        customer: frm.doc.name
-                    });
+                frm.add_custom_button('Field Meet', function () {
+                frappe.new_doc('Customer Meet', {
+                    customer: frm.doc.name
+                });
                 });
             } else {
                 // Display alert at the top if geolocation is missing
@@ -50,7 +50,7 @@ frappe.ui.form.on('Customer', {
             }
 
             // Add custom button to log or update location based on whether location is present
-            frm.add_custom_button(hasLocation ? __('Update Location') : __('Add Missing GeoLocation'), function () {
+            frm.add_custom_button(hasLocation ? 'Update Location' : 'Add Missing GeoLocation', function () {
                 frappe.confirm(
                     hasLocation
                         ? __('Do you want to update your current location?')

@@ -32,7 +32,7 @@ frappe.ui.form.on('Lead', {
             });
         } else {
             // Add custom button with phone icon to create CallLog document
-            frm.add_custom_button(__('<i class="fa fa-phone"></i> Ding'), function() {
+            frm.add_custom_button('<i class="fa fa-phone"></i> Ding', function() {
                 createDingCallLogs(frm.doc.name, frm.doc.mobile_no, frm.doc.phone);
             });
         }
@@ -56,7 +56,7 @@ frappe.ui.form.on('Lead', {
         }
 
         // Add custom button to log or update location based on whether location is present
-        frm.add_custom_button(hasLocation ? __('Update Location') : __('Add Missing GeoLocation'), function() {
+        frm.add_custom_button(hasLocation ? 'Update Location' : 'Add Missing GeoLocation', function() {
             frappe.confirm(
                 hasLocation ? __('Do you want to update your current location?') : __('Do you want to log your current location?'),
                 function() {
