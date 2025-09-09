@@ -80,23 +80,5 @@ frappe.ui.form.on('Lead', {
             );
         });
 
-        // Check if status is 'Converted'
-
-        // Check if status is 'Converted'
-        if (frm.doc.status === 'Converted') {
-            // Lock all fields but keep Save button visible
-            frm.set_read_only(true);
-
-            // Show notification at the top
-            frappe.show_alert({
-                message: __('Lead has been converted. Editing is restricted.'),
-                indicator: 'blue'
-            });
-        } else {
-            // Unlock all fields and show Save button
-            frm.set_read_only(false);
-            frm.enable_save();
-        }
-
     }
 });
