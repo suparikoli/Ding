@@ -67,6 +67,9 @@
   {
    "fieldname": "reference_docname",
    "fieldtype": "Dynamic Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Reference Name",
    "options": "reference_doctype"
   },
@@ -171,7 +174,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-05-24 20:39:12.640228",
+ "modified": "2025-09-09 15:14:14.347561",
  "modified_by": "Administrator",
  "module": "ding",
  "name": "Ding Call Logs",
@@ -203,6 +206,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],

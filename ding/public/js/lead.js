@@ -35,8 +35,13 @@ frappe.ui.form.on('Lead', {
             frm.add_custom_button('<i class="fa fa-phone"></i> Ding', function () {
                 createDingCallLogs(frm.doc.name, frm.doc.mobile_no, frm.doc.phone);
             });
+            // Add custom button to view Call Logs list with filter
+            frm.add_custom_button('<i class="fa fa-list"></i> Call Logs', function () {
+                frappe.set_route('List', 'Ding Call Logs', {
+                    reference_docname: frm.doc.name
+                });
+            });
         }
-
         // Check if lead_geolocation field is empty or null
         var hasLocation = frm.doc.lead_geolocation;
 
