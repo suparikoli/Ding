@@ -1,5 +1,5 @@
 frappe.ui.form.on('Lead', {
-    refresh: function(frm) {
+    refresh: function (frm) {
         // Function to create Ding Call Logs document
         function createDingCallLogs(leadName, mobileNo, phoneNo) {
             var new_log = frappe.model.get_new_doc('Ding Call Logs');
@@ -32,7 +32,7 @@ frappe.ui.form.on('Lead', {
             });
         } else {
             // Add custom button with phone icon to create CallLog document
-            frm.add_custom_button('<i class="fa fa-phone"></i> Ding', function() {
+            frm.add_custom_button('<i class="fa fa-phone"></i> Ding', function () {
                 createDingCallLogs(frm.doc.name, frm.doc.mobile_no, frm.doc.phone);
             });
         }
@@ -42,7 +42,7 @@ frappe.ui.form.on('Lead', {
 
         // Add custom button to create Lead Meet document if location is present
         if (hasLocation) {
-            frm.add_custom_button(__('Field Meet'), function() {
+            frm.add_custom_button(__('Field Meet'), function () {
                 frappe.new_doc('Lead Meet', {
                     lead: frm.doc.name
                 });
@@ -56,11 +56,11 @@ frappe.ui.form.on('Lead', {
         }
 
         // Add custom button to log or update location based on whether location is present
-        frm.add_custom_button(hasLocation ? 'Update Location' : 'Add Missing GeoLocation', function() {
+        frm.add_custom_button(hasLocation ? 'Update Location' : 'Add Missing GeoLocation', function () {
             frappe.confirm(
                 hasLocation ? __('Do you want to update your current location?') : __('Do you want to log your current location?'),
-                function() {
-                    navigator.geolocation.getCurrentPosition(function(position) {
+                function () {
+                    navigator.geolocation.getCurrentPosition(function (position) {
                         var latitude = position.coords.latitude;
                         var longitude = position.coords.longitude;
                         var geolocation = latitude + ',' + longitude;
@@ -70,7 +70,7 @@ frappe.ui.form.on('Lead', {
                             message: hasLocation ? __('Location updated successfully.') : __('Location logged successfully.'),
                             indicator: 'green'
                         });
-                    }, function(error) {
+                    }, function (error) {
                         frappe.show_alert({
                             message: __('Failed to fetch location. Please try again.'),
                             indicator: 'red'
@@ -81,20 +81,22 @@ frappe.ui.form.on('Lead', {
         });
 
         // Check if status is 'Converted'
+
+        // Check if status is 'Converted'
         if (frm.doc.status === 'Converted') {
-            // Disable all fields and hide 'Save' button
-            frm.set_read_only();
-            frm.disable_save();
+            // Lock all fields but keep Save button visible
+            frm.set_read_only(true);
 
             // Show notification at the top
             frappe.show_alert({
-                message: __('Lead has been converted. Editing is disabled by Ding.'),
+                message: __('Lead has been converted. Editing is restricted.'),
                 indicator: 'blue'
             });
         } else {
-            // Enable all fields and show 'Save' button
+            // Unlock all fields and show Save button
             frm.set_read_only(false);
             frm.enable_save();
         }
+
     }
 });
