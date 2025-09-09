@@ -67,9 +67,7 @@
   {
    "fieldname": "reference_docname",
    "fieldtype": "Dynamic Link",
-   "in_filter": 1,
    "in_list_view": 1,
-   "in_standard_filter": 1,
    "label": "Reference Name",
    "options": "reference_doctype"
   },
@@ -81,6 +79,7 @@
    "fieldname": "mobile_no",
    "fieldtype": "Data",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Mobile Number",
    "read_only": 1
   },
@@ -88,6 +87,7 @@
    "fieldname": "phone",
    "fieldtype": "Data",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Phone",
    "read_only": 1
   },
@@ -174,7 +174,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-09-09 15:14:14.347561",
+ "modified": "2025-09-09 16:30:30.143157",
  "modified_by": "Administrator",
  "module": "ding",
  "name": "Ding Call Logs",

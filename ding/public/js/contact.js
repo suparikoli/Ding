@@ -28,12 +28,16 @@ frappe.ui.form.on('Contact', {
             frm.add_custom_button('<i class="fa fa-phone"></i> Ding', function () {
                 createDingCallLogs(frm.doc.name, frm.doc.mobile_no, frm.doc.phone);
             });
-            // Add custom button to view Call Logs list with filter
+            // Add Call Logs button filtered by mobile_no
             frm.add_custom_button('<i class="fa fa-list"></i> Call Logs', function () {
-                frappe.set_route('List', 'Ding Call Logs', {
-                    reference_docname: frm.doc.name
-                });
+                if (frm.doc.mobile_no) {
+                    let route = '/app/ding-call-logs?mobile_no=' + encodeURIComponent(frm.doc.mobile_no);
+                    window.open(route, '_blank'); // Open in a new tab
+                } else {
+                    frappe.msgprint(__('Mobile number is missing.'));
+                }
             });
+
         }
 
         // Check if contact_geolocation field is empty or null and it's not a new document

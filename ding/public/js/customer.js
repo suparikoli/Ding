@@ -28,11 +28,14 @@ frappe.ui.form.on('Customer', {
             frm.add_custom_button('<i class="fa fa-phone"></i> Ding', function () {
                 createDingCallLogs(frm.doc.name, frm.doc.mobile_no, frm.doc.phone);
             });
-            // Add custom button to view Call Logs list with filter
+            // Add Call Logs button filtered by mobile_no
             frm.add_custom_button('<i class="fa fa-list"></i> Call Logs', function () {
-                frappe.set_route('List', 'Ding Call Logs', {
-                    reference_docname: frm.doc.name
-                });
+                if (frm.doc.mobile_no) {
+                    let route = '/app/ding-call-logs?mobile_no=' + encodeURIComponent(frm.doc.mobile_no);
+                    window.open(route, '_blank'); // Open in a new tab
+                } else {
+                    frappe.msgprint(__('Mobile number is missing.'));
+                }
             });
         }
 
@@ -43,9 +46,9 @@ frappe.ui.form.on('Customer', {
             // Add custom button to create Customer Meet document if location is present
             if (hasLocation) {
                 frm.add_custom_button('Field Meet', function () {
-                frappe.new_doc('Customer Meet', {
-                    customer: frm.doc.name
-                });
+                    frappe.new_doc('Customer Meet', {
+                        customer: frm.doc.name
+                    });
                 });
             } else {
                 // Display alert at the top if geolocation is missing
