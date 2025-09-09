@@ -15,7 +15,6 @@
   "agenda",
   "campaign",
   "locations_to_visit_section",
-  "suspect_list",
   "lead_list",
   "customer_list",
   "contact_list",
@@ -78,13 +77,6 @@
   },
   {
    "columns": 11,
-   "fieldname": "suspect_list",
-   "fieldtype": "Table",
-   "label": "Suspect List",
-   "options": "Field Visit Suspect Locations"
-  },
-  {
-   "columns": 11,
    "fieldname": "lead_list",
    "fieldtype": "Table",
    "label": "Lead List",
@@ -117,7 +109,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-05-13 14:53:15.663844",
+ "modified": "2025-09-09 14:10:19.874442",
  "modified_by": "Administrator",
  "module": "Field Sales",
  "name": "Field Visit Route Planning",
@@ -137,6 +129,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []
