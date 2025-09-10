@@ -172,9 +172,8 @@
   }
  ],
  "index_web_pages_for_search": 1,
- "is_submittable": 1,
  "links": [],
- "modified": "2025-09-09 16:30:30.143157",
+ "modified": "2025-09-09 17:38:06.223962",
  "modified_by": "Administrator",
  "module": "ding",
  "name": "Ding Call Logs",
@@ -209,6 +208,5 @@
  "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": [],
- "track_changes": 1
+ "states": []
 }
