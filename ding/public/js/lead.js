@@ -97,15 +97,15 @@ frappe.ui.form.on('Lead', {
     validate: function(frm) {
         let mobile = frm.doc.mobile_no;
         let phone = frm.doc.phone;
-        let whatsapp = frm.doc.whatsapp;
+        let whatsapp = frm.doc.whatsapp_no;
 
         // Priority: Mobile > Phone > WhatsApp
         if (mobile) {
             if (!phone) frm.set_value("phone", mobile);
-            if (!whatsapp) frm.set_value("whatsapp", mobile);
+            if (!whatsapp) frm.set_value("whatsapp_no", mobile);
         } else if (phone) {
             if (!mobile) frm.set_value("mobile_no", phone);
-            if (!whatsapp) frm.set_value("whatsapp", phone);
+            if (!whatsapp) frm.set_value("whatsapp_no", phone);
         } else if (whatsapp) {
             if (!mobile) frm.set_value("mobile_no", whatsapp);
             if (!phone) frm.set_value("phone", whatsapp);
