@@ -90,3 +90,25 @@ frappe.ui.form.on('Lead', {
 
     }
 });
+
+
+//Mobile, whatsapp & phone
+frappe.ui.form.on('Lead', {
+    validate: function(frm) {
+        let mobile = frm.doc.mobile_no;
+        let phone = frm.doc.phone;
+        let whatsapp = frm.doc.whatsapp;
+
+        // Priority: Mobile > Phone > WhatsApp
+        if (mobile) {
+            if (!phone) frm.set_value("phone", mobile);
+            if (!whatsapp) frm.set_value("whatsapp", mobile);
+        } else if (phone) {
+            if (!mobile) frm.set_value("mobile_no", phone);
+            if (!whatsapp) frm.set_value("whatsapp", phone);
+        } else if (whatsapp) {
+            if (!mobile) frm.set_value("mobile_no", whatsapp);
+            if (!phone) frm.set_value("phone", whatsapp);
+        }
+    }
+});

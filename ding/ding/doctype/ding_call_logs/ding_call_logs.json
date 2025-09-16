@@ -130,7 +130,7 @@
    "fieldname": "disposition",
    "fieldtype": "Select",
    "label": "Disposition",
-   "options": "Successful\nExisting Customer - Upgrading Plan\nInterested but Needs More Information\nInterested & Wants to Proceed Slowly\nFollow-up Needed\nExisting Customer - Renewal Reminder\nNot Available Now. Call Later\nNeeds Approval from Higher Authority\nCallback Requested\nLeft Voicemail\nLanguage Barrier\nAlready Engaged with Competitor\nTechnical Objection\nBudget Constraints\nPolicy Restrictions\nSeeking Custom Solution\nClient Dissatisfaction\nUnsuccessful\nLost Opportunity - Reason Unknown\nNot Qualified\nNot Reachable\nBusy Line\nInvalid Number\nDo Not Call\nWrong Number\nNot in Service Area",
+   "options": "\nInterested \u2013 Wants More Info\nInterested \u2013 Send Proposal / Deck\nCall Back Scheduled\nConsidering / Needs Time\nDecision Pending \u2013 Discussing with Family/Advisor\nNot Interested \u2013 At This Time\nNot Interested \u2013 Never\nInvestment Confirmed\nPayment Pending\nKYC / Documentation Pending\nTransaction Completed\nEscalated to Senior Advisor\nNo Answer / Not Reachable\nSwitched Off / Call Failed\nWrong Number / Do Not Call",
    "reqd": 1
   },
   {
@@ -173,7 +173,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-09 17:38:06.223962",
+ "modified": "2025-09-16 13:55:05.318599",
  "modified_by": "Administrator",
  "module": "ding",
  "name": "Ding Call Logs",
