@@ -2,7 +2,7 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Ding Call Logs', {
-    onload: function(frm) {
+    onload: function (frm) {
         // Set call_handler to current user
         frm.set_value('call_handler', frappe.session.user);
 
@@ -10,7 +10,7 @@ frappe.ui.form.on('Ding Call Logs', {
         frm.set_value('start_time', frappe.datetime.now_datetime());
     },
 
-    before_save: function(frm) {
+    before_save: function (frm) {
         // Set end_time to current time before saving
         frm.set_value('end_time', frappe.datetime.now_datetime());
 
@@ -22,30 +22,42 @@ frappe.ui.form.on('Ding Call Logs', {
         frm.set_value('duration', durationFormatted);
     },
 
-    refresh: function(frm) {
+    refresh: function (frm) {
+ /*
         // Check if mobile_number is present in the lead doctype
         if (frm.doc.mobile_no) {
-            frm.add_custom_button(__('Ding Mobile'), function() {
+            frm.add_custom_button(__('Ding Mobile'), function () {
                 // Play the sound
                 playNotificationSound();
                 // Trigger the call without opening a new tab
                 window.location.href = 'tel:' + frm.doc.mobile_no;
             });
-        }
 
+            frm.add_custom_button(__('<i class="fa fa-whatsapp"></i> Mobile'), function () {
+                // Open WhatsApp chat for mobile number
+                window.open('https://wa.me/' + frm.doc.mobile_no, '_blank');
+            });
+        }
+*/
         // Check if phone is present in the doctype
         if (frm.doc.phone) {
-            frm.add_custom_button(__('Ding Phone'), function() {
+            frm.add_custom_button(__('Ding Phone'), function () {
                 // Play the sound
                 playNotificationSound();
                 // Trigger the call without opening a new tab
                 window.location.href = 'tel:' + frm.doc.phone;
             });
+
+            frm.add_custom_button(__('<i class="fa fa-whatsapp"></i> Phone'), function () {
+                // Open WhatsApp chat for phone number
+                window.open('https://wa.me/' + frm.doc.phone, '_blank');
+            });
         }
     }
+
 });
 
-cur_frm.cscript.disposition = function(doc, cdt, cdn) {
+cur_frm.cscript.disposition = function (doc, cdt, cdn) {
     // Get the selected value from the Disposition field
     var disposition = doc.disposition;
     // Get the "Action Package" field
@@ -74,7 +86,7 @@ cur_frm.cscript.disposition = function(doc, cdt, cdn) {
                 '<li>Contract Signed</li>' +
                 '</ol>';
             break;
-            // Add more cases for other dispositions as needed
+        // Add more cases for other dispositions as needed
 
         case 'Existing Customer - Upgrading Plan':
             htmlContent = '<h4>Existing Customer - Upgrading Plan</h4>' +
@@ -87,7 +99,7 @@ cur_frm.cscript.disposition = function(doc, cdt, cdn) {
                 '<li>Sent Follow-up SMS with Upgrade Information</li>' +
                 '</ol>';
             break;
-            // Add more cases for other dispositions as needed
+        // Add more cases for other dispositions as needed
 
 
 
@@ -104,7 +116,7 @@ cur_frm.cscript.disposition = function(doc, cdt, cdn) {
                 '<li>Sent Follow-up SMS</li>' +
                 '</ol>';
             break;
-            // Add more cases for other dispositions as needed
+        // Add more cases for other dispositions as needed
 
 
 
@@ -119,7 +131,7 @@ cur_frm.cscript.disposition = function(doc, cdt, cdn) {
                 '<li>Sent Follow-up SMS</li>' +
                 '</ol>';
             break;
-            // Add more cases for other dispositions as needed
+        // Add more cases for other dispositions as needed
 
 
 
@@ -137,7 +149,7 @@ cur_frm.cscript.disposition = function(doc, cdt, cdn) {
                 '<li>Sent Reminder</li>' +
                 '</ol>';
             break;
-            // Add more cases for other dispositions as needed
+        // Add more cases for other dispositions as needed
 
 
 
@@ -152,7 +164,7 @@ cur_frm.cscript.disposition = function(doc, cdt, cdn) {
                 '<li>Sent Follow-up SMS for Renewal</li>' +
                 '</ol>';
             break;
-            // Add more cases for other dispositions as needed
+        // Add more cases for other dispositions as needed
 
 
 
@@ -167,7 +179,7 @@ cur_frm.cscript.disposition = function(doc, cdt, cdn) {
                 '<li>Sent Follow-up SMS</li>' +
                 '</ol>';
             break;
-            // Add more cases for other dispositions as needed
+        // Add more cases for other dispositions as needed
 
 
 
@@ -182,7 +194,7 @@ cur_frm.cscript.disposition = function(doc, cdt, cdn) {
                 '<li>Sent Follow-up SMS to Decision Maker</li>' +
                 '</ol>';
             break;
-            // Add more cases for other dispositions as needed
+        // Add more cases for other dispositions as needed
 
 
 
@@ -196,7 +208,7 @@ cur_frm.cscript.disposition = function(doc, cdt, cdn) {
                 '<li>Sent Reminder</li>' +
                 '</ol>';
             break;
-            // Add more cases for other dispositions as needed
+        // Add more cases for other dispositions as needed
 
 
 
@@ -211,7 +223,7 @@ cur_frm.cscript.disposition = function(doc, cdt, cdn) {
                 '<li>Sent Reminder</li>' +
                 '</ol>';
             break;
-            // Add more cases for other dispositions as needed
+        // Add more cases for other dispositions as needed
 
 
 
@@ -227,7 +239,7 @@ cur_frm.cscript.disposition = function(doc, cdt, cdn) {
                 '<li>Sent Follow-up SMS in Preferred Language</li>' +
                 '</ol>';
             break;
-            // Add more cases for other dispositions as needed
+        // Add more cases for other dispositions as needed
 
 
 
@@ -243,7 +255,7 @@ cur_frm.cscript.disposition = function(doc, cdt, cdn) {
                 '<li>Sent Follow-up WhatsApp Message with Comparative Analysis</li>' +
                 '</ol>';
             break;
-            // Add more cases for other dispositions as needed
+        // Add more cases for other dispositions as needed
 
 
 
@@ -259,7 +271,7 @@ cur_frm.cscript.disposition = function(doc, cdt, cdn) {
                 '<li>Sent Follow-up SMS with Technical Solutions</li>' +
                 '</ol>';
             break;
-            // Add more cases for other dispositions as needed
+        // Add more cases for other dispositions as needed
 
 
 
@@ -275,7 +287,7 @@ cur_frm.cscript.disposition = function(doc, cdt, cdn) {
                 '<li>Sent Follow-up SMS with Cost-Saving Tips</li>' +
                 '</ol>';
             break;
-            // Add more cases for other dispositions as needed
+        // Add more cases for other dispositions as needed
 
 
 
@@ -291,7 +303,7 @@ cur_frm.cscript.disposition = function(doc, cdt, cdn) {
                 '<li>Sent Follow-up SMS with Policy Options</li>' +
                 '</ol>';
             break;
-            // Add more cases for other dispositions as needed
+        // Add more cases for other dispositions as needed
 
 
 
@@ -307,7 +319,7 @@ cur_frm.cscript.disposition = function(doc, cdt, cdn) {
                 '<li>Sent Follow-up SMS with Customization Options</li>' +
                 '</ol>';
             break;
-            // Add more cases for other dispositions as needed
+        // Add more cases for other dispositions as needed
 
 
 
@@ -323,7 +335,7 @@ cur_frm.cscript.disposition = function(doc, cdt, cdn) {
                 '<li>Sent Follow-up WhatsApp Message with Resolution Details</li>' +
                 '</ol>';
             break;
-            // Add more cases for other dispositions as needed
+        // Add more cases for other dispositions as needed
 
 
 
@@ -347,7 +359,7 @@ cur_frm.cscript.disposition = function(doc, cdt, cdn) {
                 '<li>Wrong Contact Person</li>' +
                 '</ol>';
             break;
-            // Add more cases for other dispositions as needed
+        // Add more cases for other dispositions as needed
 
 
 
@@ -361,7 +373,7 @@ cur_frm.cscript.disposition = function(doc, cdt, cdn) {
                 '<li>Removed from Immediate Follow-up List</li>' +
                 '</ol>';
             break;
-            // Add more cases for other dispositions as needed
+        // Add more cases for other dispositions as needed
 
 
 
@@ -377,7 +389,7 @@ cur_frm.cscript.disposition = function(doc, cdt, cdn) {
                 '<li>Sent Follow-up SMS with Resources for Self-Education</li>' +
                 '</ol>';
             break;
-            // Add more cases for other dispositions as needed
+        // Add more cases for other dispositions as needed
 
 
 
@@ -391,7 +403,7 @@ cur_frm.cscript.disposition = function(doc, cdt, cdn) {
                 '<li>Scheduled Callback</li>' +
                 '</ol>';
             break;
-            // Add more cases for other dispositions as needed
+        // Add more cases for other dispositions as needed
 
 
 
@@ -405,7 +417,7 @@ cur_frm.cscript.disposition = function(doc, cdt, cdn) {
                 '<li>Rescheduled Call</li>' +
                 '</ol>';
             break;
-            // Add more cases for other dispositions as needed
+        // Add more cases for other dispositions as needed
 
 
 
@@ -420,7 +432,7 @@ cur_frm.cscript.disposition = function(doc, cdt, cdn) {
                 '<li>Attempted Callback with Alternative Number</li>' +
                 '</ol>';
             break;
-            // Add more cases for other dispositions as needed
+        // Add more cases for other dispositions as needed
 
 
 
@@ -435,7 +447,7 @@ cur_frm.cscript.disposition = function(doc, cdt, cdn) {
                 '<li>Added to DNC Campaign</li>' +
                 '</ol>';
             break;
-            // Add more cases for other dispositions as needed
+        // Add more cases for other dispositions as needed
 
 
 
@@ -451,7 +463,7 @@ cur_frm.cscript.disposition = function(doc, cdt, cdn) {
                 '<li>Sent Follow-up SMS for Confirmation</li>' +
                 '</ol>';
             break;
-            // Add more cases for other dispositions as needed
+        // Add more cases for other dispositions as needed
 
         case 'Not in Service Area':
             htmlContent = '<h4>Not in Service Area</h4>' +
@@ -464,9 +476,9 @@ cur_frm.cscript.disposition = function(doc, cdt, cdn) {
                 '<li>Sent Follow-up SMS with Referral Details</li>' +
                 '</ol>';
             break;
-            // Add more cases for other dispositions as needed
+        // Add more cases for other dispositions as needed
 
-    }      
+    }
     // Set HTML content to the "Action Package" field
     actionPackageField.html(htmlContent);
 };
