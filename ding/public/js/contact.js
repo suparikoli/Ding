@@ -1,6 +1,7 @@
 frappe.ui.form.on('Contact', {
     refresh: function (frm) {
-        // Function to create Ding Call Logs document
+
+        // ------------------- Utility: Create Ding Call Logs -------------------
         function createDingCallLogs(contactName, mobileNo, phoneNo) {
             var new_log = frappe.model.get_new_doc('Ding Call Logs');
             new_log.reference_doctype = 'Contact';
@@ -9,55 +10,78 @@ frappe.ui.form.on('Contact', {
             new_log.phone = phoneNo;
             new_log.type = 'Outgoing';
 
-            // Open the form for the new document
             frappe.set_route('Form', 'Ding Call Logs', new_log.name);
         }
 
-        // Check if it's a new document
+        // ------------------- Utility: Play Notification Sound -------------------
+        function playNotificationSound() {
+            const audio = new Audio('/assets/frappe/sounds/ting.mp3'); // customize sound path if needed
+            audio.play().catch(() => {});
+        }
+
         var isNewDocument = frm.doc.__islocal;
 
-        // Check if either mobile_no or phone is missing and it's not a new document
+        // ------------------- Phone & Mobile Checks -------------------
         if (!isNewDocument && (!frm.doc.mobile_no && !frm.doc.phone)) {
-            // Display alert at the top
             frappe.show_alert({
                 message: __("Phone and Mobile number are missing. Ding can't place calls."),
                 indicator: 'red'
             });
         } else if (!isNewDocument) {
-            // Add custom button with phone icon to create CallLog document
-            frm.add_custom_button('<i class="fa fa-phone"></i> Ding', function () {
+            frm.add_custom_button('<i class="fa fa-phone"></i> Ding Log', function () {
                 createDingCallLogs(frm.doc.name, frm.doc.mobile_no, frm.doc.phone);
             });
-            // Add Call Logs button filtered by mobile_no
+
             frm.add_custom_button('<i class="fa fa-list"></i> Call Logs', function () {
                 if (frm.doc.mobile_no) {
                     let route = '/app/ding-call-logs?mobile_no=' + encodeURIComponent(frm.doc.mobile_no);
-                    window.open(route, '_blank'); // Open in a new tab
+                    window.open(route, '_blank');
                 } else {
                     frappe.msgprint(__('Mobile number is missing.'));
                 }
             });
-
         }
 
-        // Check if contact_geolocation field is empty or null and it's not a new document
+        // ------------------- Ding Mobile & WhatsApp Buttons -------------------
+        if (frm.doc.mobile_no) {
+            frm.add_custom_button(__('📞 Ding Mobile'), function () {
+                playNotificationSound();
+                window.location.href = 'tel:' + frm.doc.mobile_no;
+            });
+
+            frm.add_custom_button(__('<i class="fa fa-whatsapp"></i> WhatsApp Mobile'), function () {
+                window.open('https://wa.me/' + frm.doc.mobile_no, '_blank');
+            });
+        }
+
+        if (frm.doc.phone) {
+            frm.add_custom_button(__('📞 Ding Phone'), function () {
+                playNotificationSound();
+                window.location.href = 'tel:' + frm.doc.phone;
+            });
+
+            frm.add_custom_button(__('<i class="fa fa-whatsapp"></i> WhatsApp Phone'), function () {
+                window.open('https://wa.me/' + frm.doc.phone, '_blank');
+            });
+        }
+
+        // ------------------- GeoLocation Buttons -------------------
         var hasLocation = frm.doc.contact_geolocation;
+
         if (!isNewDocument) {
             if (hasLocation) {
-                frm.add_custom_button('Field Meet', function () {
+                frm.add_custom_button(__('Field Meet'), function () {
                     frappe.new_doc('Contact Meet', {
                         contact: frm.doc.name
                     });
                 });
             } else {
-                // Display alert at the top if geolocation is missing
                 frappe.show_alert({
                     message: __("Contact Location Missing. Ding Field Meet not available."),
                     indicator: 'orange'
                 });
             }
 
-            // Add custom button to log or update location
             frm.add_custom_button(hasLocation ? 'Update Location' : 'Add Missing GeoLocation', function () {
                 frappe.confirm(
                     hasLocation
@@ -76,7 +100,7 @@ frappe.ui.form.on('Contact', {
                                     : __('Location logged successfully.'),
                                 indicator: 'green'
                             });
-                        }, function (error) {
+                        }, function () {
                             frappe.show_alert({
                                 message: __('Failed to fetch location. Please try again.'),
                                 indicator: 'red'

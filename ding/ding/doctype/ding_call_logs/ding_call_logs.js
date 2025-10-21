@@ -23,7 +23,7 @@ frappe.ui.form.on('Ding Call Logs', {
     },
 
     refresh: function (frm) {
- /*
+ 
         // Check if mobile_number is present in the lead doctype
         if (frm.doc.mobile_no) {
             frm.add_custom_button(__('Ding Mobile'), function () {
@@ -38,7 +38,7 @@ frappe.ui.form.on('Ding Call Logs', {
                 window.open('https://wa.me/' + frm.doc.mobile_no, '_blank');
             });
         }
-*/
+
         // Check if phone is present in the doctype
         if (frm.doc.phone) {
             frm.add_custom_button(__('Ding Phone'), function () {
