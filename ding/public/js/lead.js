@@ -13,7 +13,7 @@ frappe.ui.form.on('Lead', {
 
         function playNotificationSound() {
             const audio = new Audio('/assets/frappe/sounds/ting.mp3');
-            audio.play().catch(() => {});
+            audio.play().catch(() => { });
         }
 
         var isNewDocument = frm.doc.__islocal;
@@ -35,6 +35,35 @@ frappe.ui.form.on('Lead', {
             frm.add_custom_button("<i class='fa fa-whatsapp'></i> WhatsApp Mobile", function () {
                 window.open('https://wa.me/' + frm.doc.mobile_no, '_blank');
             }, dingGroup);
+
+            // ------------------- WhatsApp Company Profile -------------------
+            if (frm.doc.mobile_no) {
+                frm.add_custom_button("📄 Company Profile (WhatsApp)", function () {
+                    let msg =
+                        `Hi ${frm.doc.lead_name}, this is the link to our company profile.\n` +
+                        `https://static.polemarch.in/polemarch.pdf\n\n` +
+                        `Here is the link to our company website:\n` +
+                        `https://polemarch.in\n\n` +
+                        `And for eCommerce visit:\n` +
+                        `https://deals.polemarch.in`;
+
+                    let url = "https://wa.me/" + frm.doc.mobile_no + "?text=" + encodeURIComponent(msg);
+                    window.open(url, "_blank");
+                }, dingGroup);
+            }
+
+            // ------------------- WhatsApp Pricelist -------------------
+            if (frm.doc.mobile_no) {
+                frm.add_custom_button("💰 Price List (WhatsApp)", function () {
+                    let msg =
+                        `Hi ${frm.doc.lead_name}, here is the latest pricelist.\n` +
+                        `https://static.polemarch.in/price-list.pdf`;
+
+                    let url = "https://wa.me/" + frm.doc.mobile_no + "?text=" + encodeURIComponent(msg);
+                    window.open(url, "_blank");
+                }, dingGroup);
+            }
+
         }
 
         // ------------------- Phone Number Buttons -------------------
