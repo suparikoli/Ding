@@ -68,8 +68,8 @@ function updateGeolocationList(frm) {
     var geolocationList = [];
 
     // Fetch lat,long data from Field Visit Customer Locations
-    if (frm.doc['customer_list']) {
-        $.each(frm.doc['customer_list'], function(i, row) {
+    if (frm.doc.customer_list) {
+        frm.doc.customer_list.forEach(function(row) {
             if (row.customer_location) {
                 geolocationList.push(row.customer_location);
             }
@@ -77,26 +77,17 @@ function updateGeolocationList(frm) {
     }
 
     // Fetch lat,long data from Field Visit Lead Locations
-    if (frm.doc['lead_list']) {
-        $.each(frm.doc['lead_list'], function(i, row) {
+    if (frm.doc.lead_list) {
+        frm.doc.lead_list.forEach(function(row) {
             if (row.lead_location) {
                 geolocationList.push(row.lead_location);
             }
         });
     }
 
-    // Fetch lat,long data from Field Visit Suspect Locations
-    if (frm.doc['suspect_list']) {
-        $.each(frm.doc['suspect_list'], function(i, row) {
-            if (row.suspect_location) {
-                geolocationList.push(row.suspect_location);
-            }
-        });
-    }
-    
     // Fetch lat,long data from Field Visit Contact Locations
-    if (frm.doc['contact_list']) {
-        $.each(frm.doc['contact_list'], function(i, row) {
+    if (frm.doc.contact_list) {
+        frm.doc.contact_list.forEach(function(row) {
             if (row.contact_location) {
                 geolocationList.push(row.contact_location);
             }

@@ -16,10 +16,6 @@ frappe.ui.form.on('Lead Meet', {
             navigator.geolocation.getCurrentPosition(function(position) {
                 var latitude = position.coords.latitude;
                 var longitude = position.coords.longitude;
-                console.log('Latitude:', latitude);
-                console.log('Longitude:', longitude);
-
-                // Set the "Logged Geo-Location" field
                 frm.set_value('logged_geo_location', latitude + ',' + longitude);
             });
         });
@@ -61,7 +57,7 @@ frappe.ui.form.on('Lead Meet', {
             if (!leadLocation || !isValidLatLong(leadLocation)) {
                 var leadName = frm.doc.lead;
                 if (leadName) {
-                    var leadUrl = frappe.urllib.get_base_url() + '/app/lead/' + leadName;
+                    var leadUrl = window.location.origin + '/app/lead/' + leadName;
                     window.open(leadUrl, '_blank');
                 } else {
                     frappe.msgprint(__('Please select a lead.'));

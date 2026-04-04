@@ -57,11 +57,11 @@ frappe.ui.form.on('Ding Call Logs', {
 
 });
 
-cur_frm.cscript.disposition = function (doc, cdt, cdn) {
+frappe.ui.form.on('Ding Call Logs', 'disposition', function (frm) {
     // Get the selected value from the Disposition field
-    var disposition = doc.disposition;
-    // Get the "Action Package" field
-    var actionPackageField = cur_frm.fields_dict['action_package'].$wrapper;
+    var disposition = frm.doc.disposition;
+    // Get the "Action Package" field wrapper
+    var actionPackageField = frm.fields_dict['action_package'].$wrapper;
     // Clear existing content in the "Action Package" field
     actionPackageField.empty();
     // Define HTML content based on the selected disposition
@@ -481,11 +481,10 @@ cur_frm.cscript.disposition = function (doc, cdt, cdn) {
     }
     // Set HTML content to the "Action Package" field
     actionPackageField.html(htmlContent);
-};
+});
 
 
-// Function to play the notification sound
 function playNotificationSound() {
-    var audio = new Audio('public/ding.mp3');
-    audio.play();
+    var audio = new Audio('/assets/frappe/sounds/ting.mp3');
+    audio.play().catch(function() {});
 }

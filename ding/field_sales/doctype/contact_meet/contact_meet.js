@@ -16,10 +16,6 @@ frappe.ui.form.on('Contact Meet', {
             navigator.geolocation.getCurrentPosition(function(position) {
                 var latitude = position.coords.latitude;
                 var longitude = position.coords.longitude;
-                console.log('Latitude:', latitude);
-                console.log('Longitude:', longitude);
-
-                // Set the "Logged Geo-Location" field
                 frm.set_value('logged_geo_location', latitude + ',' + longitude);
             });
         });
@@ -61,7 +57,7 @@ frappe.ui.form.on('Contact Meet', {
             if (!contactLocation || !isValidLatLong(contactLocation)) {
                 var contactName = frm.doc.contact;
                 if (contactName) {
-                    var contactUrl = frappe.urllib.get_base_url() + '/app/contact/' + contactName;
+                    var contactUrl = window.location.origin + '/app/contact/' + contactName;
                     window.open(contactUrl, '_blank');
                 } else {
                     frappe.msgprint(__('Please select a contact.'));

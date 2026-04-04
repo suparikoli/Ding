@@ -17,10 +17,6 @@ frappe.ui.form.on('Customer Meet', {
             navigator.geolocation.getCurrentPosition(function(position) {
                 var latitude = position.coords.latitude;
                 var longitude = position.coords.longitude;
-                console.log('Latitude:', latitude);
-                console.log('Longitude:', longitude);
-
-                // Set the "Logged Geo-Location" field
                 frm.set_value('logged_geo_location', latitude + ',' + longitude);
             });
         });
@@ -32,7 +28,7 @@ frappe.ui.form.on('Customer Meet', {
             // Open POS URL with customer prefilled
             var customer = frm.doc.customer;
             if (customer) {
-                var posUrl = `${frappe.urllib.get_base_url()}/app/point-of-sale?customer=${encodeURIComponent(customer)}`;
+                var posUrl = `${window.location.origin}/app/point-of-sale?customer=${encodeURIComponent(customer)}`;
                 window.open(posUrl, '_blank');
             } else {
                 frappe.msgprint(__('Please select a customer.'));
@@ -77,7 +73,7 @@ frappe.ui.form.on('Customer Meet', {
             if (!customerLocation || !isValidLatLong(customerLocation)) {
                 var customerName = frm.doc.customer;
                 if (customerName) {
-                    var customerUrl = frappe.urllib.get_base_url() + '/app/customer/' + customerName;
+                    var customerUrl = window.location.origin + '/app/customer/' + customerName;
                     window.open(customerUrl, '_blank');
                 } else {
                     frappe.msgprint(__('Please select a customer.'));

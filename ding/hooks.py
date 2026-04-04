@@ -79,7 +79,7 @@ after_install = "ding.install.add_custom_fields"
 # Uninstallation
 # ------------
 
-# before_uninstall = "ding.uninstall.before_uninstall"
+before_uninstall = "ding.uninstall.before_uninstall"
 # after_uninstall = "ding.uninstall.after_uninstall"
 
 # Integration Setup
