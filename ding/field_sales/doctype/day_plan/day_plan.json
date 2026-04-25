@@ -1,0 +1,246 @@
+{
+ "actions": [],
+ "autoname": "format:DP-{assigned_to}-{plan_date}",
+ "creation": "2026-04-25 00:00:00.000000",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "header_section",
+  "plan_date",
+  "assigned_to",
+  "territory",
+  "column_break_header",
+  "status",
+  "start_geolocation",
+  "stops_section",
+  "stops",
+  "route_map_section",
+  "route_map",
+  "summary_section",
+  "summary_planned_count",
+  "summary_completed_count",
+  "summary_skipped_count",
+  "summary_no_show_count",
+  "column_break_summary",
+  "summary_planned_minutes",
+  "summary_actual_minutes",
+  "summary_planned_distance_m",
+  "adherence_pct",
+  "notes_section",
+  "notes",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "header_section",
+   "fieldtype": "Section Break",
+   "label": "Day Plan"
+  },
+  {
+   "fieldname": "plan_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Plan Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "assigned_to",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Assigned Agent",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "territory",
+   "fieldtype": "Link",
+   "label": "Territory",
+   "options": "Territory"
+  },
+  {
+   "fieldname": "column_break_header",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Draft\nReleased\nIn Progress\nCompleted\nCancelled",
+   "read_only": 1
+  },
+  {
+   "description": "Day-start origin; defaults to the agent's last known location.",
+   "fieldname": "start_geolocation",
+   "fieldtype": "Geolocation",
+   "label": "Start Location"
+  },
+  {
+   "fieldname": "stops_section",
+   "fieldtype": "Section Break",
+   "label": "Visit Stops"
+  },
+  {
+   "fieldname": "stops",
+   "fieldtype": "Table",
+   "label": "Stops",
+   "options": "Visit Stop"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "route_map_section",
+   "fieldtype": "Section Break",
+   "label": "Route Preview"
+  },
+  {
+   "fieldname": "route_map",
+   "fieldtype": "HTML",
+   "label": "Route Map",
+   "options": "<div id=\"day-plan-route-map\" style=\"height:340px;border-radius:8px;border:1px solid var(--border-color);background:var(--bg-light-gray)\"></div>"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "summary_section",
+   "fieldtype": "Section Break",
+   "label": "Summary"
+  },
+  {
+   "fieldname": "summary_planned_count",
+   "fieldtype": "Int",
+   "label": "Planned",
+   "read_only": 1
+  },
+  {
+   "fieldname": "summary_completed_count",
+   "fieldtype": "Int",
+   "label": "Completed",
+   "read_only": 1
+  },
+  {
+   "fieldname": "summary_skipped_count",
+   "fieldtype": "Int",
+   "label": "Skipped",
+   "read_only": 1
+  },
+  {
+   "fieldname": "summary_no_show_count",
+   "fieldtype": "Int",
+   "label": "No Show",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_summary",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "summary_planned_minutes",
+   "fieldtype": "Duration",
+   "label": "Planned Time",
+   "read_only": 1
+  },
+  {
+   "fieldname": "summary_actual_minutes",
+   "fieldtype": "Duration",
+   "label": "Actual Time",
+   "read_only": 1
+  },
+  {
+   "description": "meters",
+   "fieldname": "summary_planned_distance_m",
+   "fieldtype": "Float",
+   "label": "Planned Distance",
+   "precision": "1",
+   "read_only": 1
+  },
+  {
+   "fieldname": "adherence_pct",
+   "fieldtype": "Percent",
+   "label": "Adherence",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "notes_section",
+   "fieldtype": "Section Break",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Long Text",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Day Plan",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-04-25 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Field Sales",
+ "name": "Day Plan",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Field Operations Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "cancel": 1,
+   "create": 1,
+   "email": 1,
+   "if_owner": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Field Agent",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

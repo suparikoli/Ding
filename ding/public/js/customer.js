@@ -1,3 +1,11 @@
+let _dingSettingsPromise = null;
+function getDingSettings() {
+    if (!_dingSettingsPromise) {
+        _dingSettingsPromise = frappe.db.get_doc('Ding Settings');
+    }
+    return _dingSettingsPromise;
+}
+
 frappe.ui.form.on('Customer', {
     refresh: function (frm) {
 
@@ -15,7 +23,7 @@ frappe.ui.form.on('Customer', {
         // ------------------- Utility: Play Notification Sound -------------------
         function playNotificationSound() {
             const audio = new Audio('/assets/frappe/sounds/ting.mp3');
-            audio.play().catch(() => { });
+            audio.play().catch(err => console.debug('Ding notification sound blocked:', err));
         }
 
         var isNewDocument = frm.doc.__islocal;
@@ -59,33 +67,35 @@ frappe.ui.form.on('Customer', {
                 window.open('https://wa.me/' + frm.doc.mobile_no, '_blank');
             }, dingGroup);
 
-            // ------------------- WhatsApp Company Profile -------------------
-            if (frm.doc.mobile_no) {
-                frm.add_custom_button("📄 Company Profile (WhatsApp)", function () {
-                    let msg =
-                        `Hi ${frm.doc.lead_name}, this is the link to our company profile.\n` +
-                        `https://static.polemarch.in/polemarch.pdf\n\n` +
-                        `Here is the link to our company website:\n` +
-                        `https://polemarch.in\n\n` +
-                        `And for eCommerce visit:\n` +
-                        `https://deals.polemarch.in`;
+            // ------------------- WhatsApp Company Profile + Pricelist (from Ding Settings) -------------------
+            getDingSettings().then(settings => {
+                const greetingName = frm.doc.customer_name;
 
-                    let url = "https://wa.me/" + frm.doc.mobile_no + "?text=" + encodeURIComponent(msg);
-                    window.open(url, "_blank");
-                }, dingGroup);
-            }
+                if (frm.doc.mobile_no && settings.company_profile_url) {
+                    frm.add_custom_button("📄 Company Profile (WhatsApp)", function () {
+                        const lines = [
+                            `Hi ${greetingName || ''}, this is the link to our company profile.`,
+                            settings.company_profile_url,
+                        ];
+                        if (settings.company_website_url) {
+                            lines.push('', 'Here is the link to our company website:', settings.company_website_url);
+                        }
+                        if (settings.ecommerce_url) {
+                            lines.push('', 'And for eCommerce visit:', settings.ecommerce_url);
+                        }
+                        const url = "https://wa.me/" + frm.doc.mobile_no + "?text=" + encodeURIComponent(lines.join('\n'));
+                        window.open(url, "_blank");
+                    }, dingGroup);
+                }
 
-            // ------------------- WhatsApp Pricelist -------------------
-            if (frm.doc.mobile_no) {
-                frm.add_custom_button("💰 Price List (WhatsApp)", function () {
-                    let msg =
-                        `Hi ${frm.doc.lead_name}, here is the latest pricelist.\n` +
-                        `https://static.polemarch.in/price-list.pdf`;
-
-                    let url = "https://wa.me/" + frm.doc.mobile_no + "?text=" + encodeURIComponent(msg);
-                    window.open(url, "_blank");
-                }, dingGroup);
-            }
+                if (frm.doc.mobile_no && settings.price_list_url) {
+                    frm.add_custom_button("💰 Price List (WhatsApp)", function () {
+                        const msg = `Hi ${greetingName || ''}, here is the latest pricelist.\n${settings.price_list_url}`;
+                        const url = "https://wa.me/" + frm.doc.mobile_no + "?text=" + encodeURIComponent(msg);
+                        window.open(url, "_blank");
+                    }, dingGroup);
+                }
+            });
         }
 
         if (frm.doc.phone) {
@@ -97,6 +107,13 @@ frappe.ui.form.on('Customer', {
 
             frm.add_custom_button('<i class="fa fa-whatsapp"></i> WhatsApp Phone', function () {
                 window.open('https://wa.me/' + frm.doc.phone, '_blank');
+            }, dingGroup);
+        }
+
+        // ------------------- Plan visit (adds to today's Day Plan) -------------------
+        if (!isNewDocument) {
+            frm.add_custom_button("📅 Plan visit", function () {
+                window.dingPromptPlanVisit && window.dingPromptPlanVisit('Customer', frm.doc.name);
             }, dingGroup);
         }
 

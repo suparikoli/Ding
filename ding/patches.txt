@@ -1,6 +1,12 @@
 [pre_model_sync]
 # Patches added in this section will be executed before doctypes are migrated
 # Read docs to understand patches: https://frappeframework.com/docs/v14/user/en/database-migrations
+ding.patches.v1_1.snapshot_pre_geo_data
 
 [post_model_sync]
 # Patches added in this section will be executed after doctypes are migrated
+ding.patches.v1_0.bootstrap_field_sales_roles
+ding.patches.v1_1.restore_post_geo_data
+ding.patches.v1_2.create_workspace_assets
+ding.patches.v1_2.create_notifications
+ding.patches.v1_3.default_to_google_maps

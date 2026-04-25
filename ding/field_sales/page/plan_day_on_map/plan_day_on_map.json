@@ -1,0 +1,22 @@
+{
+ "content": null,
+ "creation": "2026-04-25 00:00:00.000000",
+ "doctype": "Page",
+ "icon": "octicon octicon-pin",
+ "idx": 0,
+ "modified": "2026-04-25 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Field Sales",
+ "name": "plan-day-on-map",
+ "owner": "Administrator",
+ "page_name": "plan-day-on-map",
+ "roles": [
+  {"role": "Field Operations Manager"},
+  {"role": "System Manager"}
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": "Plan a Day on Map"
+}

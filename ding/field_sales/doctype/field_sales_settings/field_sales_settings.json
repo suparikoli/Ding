@@ -1,0 +1,173 @@
+{
+ "actions": [],
+ "creation": "2026-04-25 00:00:00.000000",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "general_section",
+  "default_visit_duration",
+  "off_target_threshold_meters",
+  "geofence_radius_m",
+  "column_break_general",
+  "heartbeat_interval_seconds",
+  "abandoned_checkin_minutes",
+  "auto_create_stock_entry_for_service_parts",
+  "maps_section",
+  "maps_provider",
+  "maps_api_key",
+  "maps_self_hosted_url",
+  "column_break_maps",
+  "directions_provider",
+  "enable_geocoding",
+  "enable_road_distance_optimization",
+  "nominatim_user_agent"
+ ],
+ "fields": [
+  {
+   "fieldname": "general_section",
+   "fieldtype": "Section Break",
+   "label": "General"
+  },
+  {
+   "default": "1800",
+   "description": "Default duration for a new visit stop, in seconds.",
+   "fieldname": "default_visit_duration",
+   "fieldtype": "Duration",
+   "label": "Default Visit Duration"
+  },
+  {
+   "default": "500",
+   "description": "Distance from target above which a Meet is flagged off_target and a comment is required.",
+   "fieldname": "off_target_threshold_meters",
+   "fieldtype": "Float",
+   "label": "Off-target Threshold (meters)",
+   "precision": "0"
+  },
+  {
+   "default": "100",
+   "description": "Auto check-in radius around a planned visit point.",
+   "fieldname": "geofence_radius_m",
+   "fieldtype": "Float",
+   "label": "Geofence Radius (meters)",
+   "precision": "0"
+  },
+  {
+   "fieldname": "column_break_general",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "300",
+   "description": "Mobile heartbeat ping interval in seconds.",
+   "fieldname": "heartbeat_interval_seconds",
+   "fieldtype": "Int",
+   "label": "Heartbeat Interval (seconds)"
+  },
+  {
+   "default": "120",
+   "description": "An open Meet older than this gets auto-closed as No-show.",
+   "fieldname": "abandoned_checkin_minutes",
+   "fieldtype": "Int",
+   "label": "Abandoned Check-in Sweep (minutes)"
+  },
+  {
+   "default": "0",
+   "description": "On Meet submit with visit_type=Service, post a Stock Entry for parts_used rows.",
+   "fieldname": "auto_create_stock_entry_for_service_parts",
+   "fieldtype": "Check",
+   "label": "Auto-create Stock Entry for service parts"
+  },
+  {
+   "fieldname": "maps_section",
+   "fieldtype": "Section Break",
+   "label": "Maps & Routing"
+  },
+  {
+   "default": "Google",
+   "description": "Google Maps gives the best UX and works in the PWA. Add your API key below. Falls back to OpenStreetMap automatically when no key is set.",
+   "fieldname": "maps_provider",
+   "fieldtype": "Select",
+   "label": "Maps Provider",
+   "options": "Google\nOpenStreetMap\nOpenRouteService\nOSRM\nMapbox\nHERE"
+  },
+  {
+   "depends_on": "eval:doc.maps_provider !== 'OpenStreetMap' && doc.maps_provider !== 'OSRM'",
+   "description": "Required for Google Maps / Mapbox / HERE. For Google, restrict the key to HTTP referrers + the Maps JS, Geocoding, and Distance Matrix APIs in your Google Cloud project.",
+   "fieldname": "maps_api_key",
+   "fieldtype": "Password",
+   "label": "Maps API Key"
+  },
+  {
+   "depends_on": "eval:doc.maps_provider === 'OSRM'",
+   "description": "OSRM base URL, e.g. https://router.project-osrm.org or your self-hosted server.",
+   "fieldname": "maps_self_hosted_url",
+   "fieldtype": "Data",
+   "label": "OSRM Server URL"
+  },
+  {
+   "fieldname": "column_break_maps",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Google Maps URL",
+   "description": "Where the \"Open in Maps\" button takes the agent.",
+   "fieldname": "directions_provider",
+   "fieldtype": "Select",
+   "label": "Directions Provider",
+   "options": "Google Maps URL\nMapbox URL\nOpenStreetMap (browser)"
+  },
+  {
+   "default": "0",
+   "description": "Allow address → lat/lng lookups via the configured provider.",
+   "fieldname": "enable_geocoding",
+   "fieldtype": "Check",
+   "label": "Enable Geocoding"
+  },
+  {
+   "default": "0",
+   "description": "If on, route optimization uses the provider's distance matrix (road distances). Off = Haversine.",
+   "fieldname": "enable_road_distance_optimization",
+   "fieldtype": "Check",
+   "label": "Enable Road-distance Optimization"
+  },
+  {
+   "default": "ding-field-sales/1.0",
+   "description": "Required by Nominatim's terms when using OSM geocoding.",
+   "fieldname": "nominatim_user_agent",
+   "fieldtype": "Data",
+   "label": "Nominatim User-Agent"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-04-25 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Field Sales",
+ "name": "Field Sales Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Field Operations Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

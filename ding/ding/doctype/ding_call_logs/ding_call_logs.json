@@ -47,7 +47,7 @@
   },
   {
    "fieldname": "duration",
-   "fieldtype": "Data",
+   "fieldtype": "Duration",
    "in_list_view": 1,
    "label": "Duration",
    "read_only": 1

@@ -29,37 +29,37 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
     return d;
 }
 
-// Function to find shortest route and open in Google Maps
+// Open Google Maps directions for the planned route. Origin is the device's
+// current GPS position; falls back to "Current Location" string if denied.
 function openShortestRoute(geolocationList) {
-    // Split geolocationList into lat,long pairs
-    var locations = geolocationList.split('|');
+    if (!geolocationList) {
+        frappe.msgprint(__('No locations to route. Click "Update List" first.'));
+        return;
+    }
+    var stops = geolocationList.split('|').filter(function(s) { return s && s.indexOf(',') > -1; });
+    if (!stops.length) {
+        frappe.msgprint(__('No valid locations found.'));
+        return;
+    }
+    var destination = stops[stops.length - 1];
+    var waypoints = stops.slice(0, -1).join('|');
 
-    // Calculate distances between each pair of adjacent locations
-    var distances = [];
-    for (var i = 0; i < locations.length - 1; i++) {
-        var latLong1 = locations[i].split(',');
-        var latLong2 = locations[i + 1].split(',');
-        var distance = calculateDistance(parseFloat(latLong1[0]), parseFloat(latLong1[1]), parseFloat(latLong2[0]), parseFloat(latLong2[1]));
-        distances.push(distance);
+    function buildAndOpen(origin) {
+        var url = 'https://www.google.com/maps/dir/?api=1'
+            + '&origin=' + encodeURIComponent(origin)
+            + '&destination=' + encodeURIComponent(destination)
+            + (waypoints ? '&waypoints=' + encodeURIComponent(waypoints) : '');
+        window.open(url, '_blank');
     }
 
-    // Create an array of indices in ascending order of distances
-    var sortedIndices = distances.map(function(_, i) { return i; }).sort(function(a, b) { return distances[a] - distances[b]; });
-
-    // Arrange locations in the order of the shortest route
-    var arrangedLocations = [locations[0]];
-    for (var i = 0; i < sortedIndices.length; i++) {
-        arrangedLocations.push(locations[sortedIndices[i] + 1]);
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            function(pos) { buildAndOpen(pos.coords.latitude + ',' + pos.coords.longitude); },
+            function() { buildAndOpen('Current Location'); }
+        );
+    } else {
+        buildAndOpen('Current Location');
     }
-
-    // Construct the Google Maps URL with the arranged locations
-    var url = "https://www.google.com/maps?dir=your+starting+address&daddr=";
-    for (var i = 0; i < arrangedLocations.length; i++) {
-        url += "+to:" + arrangedLocations[i];
-    }
-    
-    // Open the URL in a new tab/window
-    window.open(url, '_blank');
 }
 
 // Function to update geolocation_list field

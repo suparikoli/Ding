@@ -11,7 +11,10 @@ app_license = "mit"
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/ding/css/ding.css"
-# app_include_js = "/assets/ding/js/ding.js"
+app_include_js = [
+	"/assets/ding/js/field_maps.js",
+	"/assets/ding/js/plan_visit_bulk.js",
+]
 
 # include js, css files in header of web template
 # web_include_css = "/assets/ding/css/ding.css"
@@ -108,13 +111,20 @@ before_uninstall = "ding.uninstall.before_uninstall"
 # -----------
 # Permissions evaluated in scripted ways
 
-# permission_query_conditions = {
-# 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
-# }
-#
-# has_permission = {
-# 	"Event": "frappe.desk.doctype.event.event.has_permission",
-# }
+permission_query_conditions = {
+	"Lead Meet": "ding.field_sales.permissions.meet_query",
+	"Customer Meet": "ding.field_sales.permissions.meet_query",
+	"Contact Meet": "ding.field_sales.permissions.meet_query",
+	"Field Visit Route Planning": "ding.field_sales.permissions.route_planning_query",
+	"Day Plan": "ding.field_sales.permissions.day_plan_query",
+	"Field Rep Heartbeat": "ding.field_sales.permissions.heartbeat_query",
+}
+
+has_permission = {
+	"Lead Meet": "ding.field_sales.permissions.meet_has_permission",
+	"Customer Meet": "ding.field_sales.permissions.meet_has_permission",
+	"Contact Meet": "ding.field_sales.permissions.meet_has_permission",
+}
 
 # DocType Class
 # ---------------
@@ -128,34 +138,29 @@ before_uninstall = "ding.uninstall.before_uninstall"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"Lead Meet": {
+		"validate": "ding.field_sales.permissions.guard_concurrent_meet",
+	},
+	"Customer Meet": {
+		"validate": "ding.field_sales.permissions.guard_concurrent_meet",
+	},
+	"Contact Meet": {
+		"validate": "ding.field_sales.permissions.guard_concurrent_meet",
+	},
+}
 
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"ding.tasks.all"
-# 	],
-# 	"daily": [
-# 		"ding.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"ding.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"ding.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"ding.tasks.monthly"
-# 	],
-# }
+scheduler_events = {
+	"hourly": [
+		"ding.field_sales.scheduler.sweep_abandoned_checkins",
+	],
+	"daily": [
+		"ding.field_sales.scheduler.purge_old_heartbeats",
+	],
+}
 
 # Testing
 # -------

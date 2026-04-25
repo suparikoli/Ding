@@ -1,0 +1,72 @@
+{
+ "actions": [],
+ "creation": "2026-04-25 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "competitor",
+  "sku_or_service",
+  "price",
+  "promotion_running",
+  "photo",
+  "notes"
+ ],
+ "fields": [
+  {
+   "columns": 2,
+   "fieldname": "competitor",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Competitor",
+   "reqd": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "sku_or_service",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "SKU / Service"
+  },
+  {
+   "columns": 1,
+   "fieldname": "price",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Price"
+  },
+  {
+   "columns": 1,
+   "fieldname": "promotion_running",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Promo?"
+  },
+  {
+   "columns": 2,
+   "fieldname": "photo",
+   "fieldtype": "Attach Image",
+   "label": "Photo"
+  },
+  {
+   "columns": 4,
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-04-25 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Field Sales",
+ "name": "Field Visit Competitor Finding",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

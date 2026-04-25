@@ -1,3 +1,11 @@
+let _dingSettingsPromise = null;
+function getDingSettings() {
+    if (!_dingSettingsPromise) {
+        _dingSettingsPromise = frappe.db.get_doc('Ding Settings');
+    }
+    return _dingSettingsPromise;
+}
+
 frappe.ui.form.on('Lead', {
     refresh: function (frm) {
 
@@ -13,7 +21,7 @@ frappe.ui.form.on('Lead', {
 
         function playNotificationSound() {
             const audio = new Audio('/assets/frappe/sounds/ting.mp3');
-            audio.play().catch(() => { });
+            audio.play().catch(err => console.debug('Ding notification sound blocked:', err));
         }
 
         var isNewDocument = frm.doc.__islocal;
@@ -36,34 +44,35 @@ frappe.ui.form.on('Lead', {
                 window.open('https://wa.me/' + frm.doc.mobile_no, '_blank');
             }, dingGroup);
 
-            // ------------------- WhatsApp Company Profile -------------------
-            if (frm.doc.mobile_no) {
-                frm.add_custom_button("📄 Company Profile (WhatsApp)", function () {
-                    let msg =
-                        `Hi ${frm.doc.lead_name}, this is the link to our company profile.\n` +
-                        `https://static.polemarch.in/polemarch.pdf\n\n` +
-                        `Here is the link to our company website:\n` +
-                        `https://polemarch.in\n\n` +
-                        `And for eCommerce visit:\n` +
-                        `https://deals.polemarch.in`;
+            // ------------------- WhatsApp Company Profile + Pricelist (from Ding Settings) -------------------
+            getDingSettings().then(settings => {
+                const greetingName = frm.doc.lead_name;
 
-                    let url = "https://wa.me/" + frm.doc.mobile_no + "?text=" + encodeURIComponent(msg);
-                    window.open(url, "_blank");
-                }, dingGroup);
-            }
+                if (frm.doc.mobile_no && settings.company_profile_url) {
+                    frm.add_custom_button("📄 Company Profile (WhatsApp)", function () {
+                        const lines = [
+                            `Hi ${greetingName || ''}, this is the link to our company profile.`,
+                            settings.company_profile_url,
+                        ];
+                        if (settings.company_website_url) {
+                            lines.push('', 'Here is the link to our company website:', settings.company_website_url);
+                        }
+                        if (settings.ecommerce_url) {
+                            lines.push('', 'And for eCommerce visit:', settings.ecommerce_url);
+                        }
+                        const url = "https://wa.me/" + frm.doc.mobile_no + "?text=" + encodeURIComponent(lines.join('\n'));
+                        window.open(url, "_blank");
+                    }, dingGroup);
+                }
 
-            // ------------------- WhatsApp Pricelist -------------------
-            if (frm.doc.mobile_no) {
-                frm.add_custom_button("💰 Price List (WhatsApp)", function () {
-                    let msg =
-                        `Hi ${frm.doc.lead_name}, here is the latest pricelist.\n` +
-                        `https://static.polemarch.in/price-list.pdf`;
-
-                    let url = "https://wa.me/" + frm.doc.mobile_no + "?text=" + encodeURIComponent(msg);
-                    window.open(url, "_blank");
-                }, dingGroup);
-            }
-
+                if (frm.doc.mobile_no && settings.price_list_url) {
+                    frm.add_custom_button("💰 Price List (WhatsApp)", function () {
+                        const msg = `Hi ${greetingName || ''}, here is the latest pricelist.\n${settings.price_list_url}`;
+                        const url = "https://wa.me/" + frm.doc.mobile_no + "?text=" + encodeURIComponent(msg);
+                        window.open(url, "_blank");
+                    }, dingGroup);
+                }
+            });
         }
 
         // ------------------- Phone Number Buttons -------------------
@@ -99,6 +108,11 @@ frappe.ui.form.on('Lead', {
                 }
             }, dingGroup);
         }
+
+        // ------------------- Plan visit (adds to today's Day Plan) -------------------
+        frm.add_custom_button("📅 Plan visit", function () {
+            dingPromptPlanVisit('Lead', frm.doc.name);
+        }, dingGroup);
 
         // ------------------- Field Meet + Geolocation -------------------
         var hasLocation = frm.doc.lead_geolocation;
@@ -155,3 +169,39 @@ frappe.ui.form.on('Lead', {
         }
     }
 });
+
+window.dingPromptPlanVisit = window.dingPromptPlanVisit || function (clientDoctype, clientName) {
+    const dialog = new frappe.ui.Dialog({
+        title: __('Plan a visit'),
+        fields: [
+            { label: __('Date'), fieldname: 'plan_date', fieldtype: 'Date', default: frappe.datetime.get_today(), reqd: 1 },
+            { label: __('Agent'), fieldname: 'agent', fieldtype: 'Link', options: 'User', default: frappe.session.user, reqd: 1 },
+            { label: __('Visit Type'), fieldname: 'visit_type', fieldtype: 'Select',
+              options: 'Sales\nDemo\nService\nDelivery\nCollection\nSurvey\nOther', default: 'Sales' },
+            { label: __('Objective'), fieldname: 'objective', fieldtype: 'Small Text' },
+        ],
+        primary_action_label: __('Add to plan'),
+        primary_action: function (values) {
+            frappe.call({
+                method: 'ding.field_sales.api.add_to_day_plan',
+                args: {
+                    client_doctype: clientDoctype,
+                    client_name: clientName,
+                    agent: values.agent,
+                    plan_date: values.plan_date,
+                    visit_type: values.visit_type,
+                    objective: values.objective || ''
+                },
+                callback: function (r) {
+                    dialog.hide();
+                    if (r.message && r.message.plan_name) {
+                        const verb = r.message.added ? __('Added to plan') : __('Already on plan');
+                        frappe.show_alert({ message: verb, indicator: 'green' });
+                        frappe.set_route('Form', 'Day Plan', r.message.plan_name);
+                    }
+                }
+            });
+        }
+    });
+    dialog.show();
+};

@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"wxDlZxmyWB\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Field Sales</span>\",\"col\":12}},{\"id\":\"pDyUPVP-J4\",\"type\":\"card\",\"data\":{\"card_name\":\"Meeting Doctypes\",\"col\":4}},{\"id\":\"zmxf6RC-eA\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Route Planning\",\"col\":3}},{\"id\":\"96burDTnak\",\"type\":\"spacer\",\"data\":{\"col\":12}}]",
+ "content": "[{\"id\":\"wxDlZxmyWB\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Field Sales</span>\",\"col\":12}},{\"id\":\"today_h\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h6\\\">Today</span>\",\"col\":12}},{\"id\":\"sc_plan_map\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Plan a Day on Map\",\"col\":3}},{\"id\":\"sc_my_day\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"My Field Day\",\"col\":3}},{\"id\":\"sc_manager_map\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Manager Map\",\"col\":3}},{\"id\":\"sc_day_plan\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Day Plan\",\"col\":3}},{\"id\":\"meeting_h\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h6\\\">Meetings</span>\",\"col\":12}},{\"id\":\"pDyUPVP-J4\",\"type\":\"card\",\"data\":{\"card_name\":\"Meeting Doctypes\",\"col\":4}},{\"id\":\"reports_card\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}},{\"id\":\"settings_card\",\"type\":\"card\",\"data\":{\"card_name\":\"Configuration\",\"col\":4}},{\"id\":\"96burDTnak\",\"type\":\"spacer\",\"data\":{\"col\":12}}]",
  "creation": "2024-04-18 17:14:08.813735",
  "custom_blocks": [],
  "docstatus": 0,
@@ -25,16 +25,6 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Suspect Meet",
-   "link_count": 0,
-   "link_to": "Suspect Meet",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
    "label": "Lead Meet",
    "link_count": 0,
    "link_to": "Lead Meet",
@@ -51,9 +41,67 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Contact Meet",
+   "link_count": 0,
+   "link_to": "Contact Meet",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Reports",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Day Plan Adherence",
+   "link_count": 0,
+   "link_to": "Day Plan Adherence",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Configuration",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Field Sales Settings",
+   "link_count": 0,
+   "link_to": "Field Sales Settings",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Ding Settings",
+   "link_count": 0,
+   "link_to": "Ding Settings",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2024-04-22 10:59:02.598978",
+ "modified": "2026-04-25 00:00:00.000000",
  "modified_by": "Administrator",
  "module": "Field Sales",
  "name": "Field Sales",
@@ -66,6 +114,35 @@
  "sequence_id": 39.0,
  "shortcuts": [
   {
+   "color": "Yellow",
+   "doc_view": "",
+   "label": "Plan a Day on Map",
+   "link_to": "plan-day-on-map",
+   "type": "Page"
+  },
+  {
+   "color": "Blue",
+   "doc_view": "",
+   "label": "My Field Day",
+   "link_to": "my-field-day",
+   "type": "Page"
+  },
+  {
+   "color": "Green",
+   "doc_view": "",
+   "label": "Manager Map",
+   "link_to": "manager-map",
+   "type": "Page"
+  },
+  {
+   "color": "Yellow",
+   "doc_view": "List",
+   "label": "Day Plan",
+   "link_to": "Day Plan",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
    "color": "Grey",
    "doc_view": "List",
    "label": "Route Planning",
@@ -74,5 +151,6 @@
    "type": "DocType"
   }
  ],
- "title": "Field Sales"
+ "title": "Field Sales",
+ "type": "Workspace"
 }

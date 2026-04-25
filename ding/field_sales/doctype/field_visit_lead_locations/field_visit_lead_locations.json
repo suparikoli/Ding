@@ -24,7 +24,7 @@
   },
   {
    "columns": 3,
-   "fetch_from": "lead.custom_lead_geolocation",
+   "fetch_from": "lead.lead_geolocation",
    "fieldname": "lead_location",
    "fieldtype": "Data",
    "in_list_view": 1,

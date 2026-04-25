@@ -1,25 +1,63 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:{DD}-{MM}-{YY}-{suspect}-{creator}:{###}",
+ "autoname": "format:{DD}-{MM}-{YY}-{lead}-{creator}:{###}",
  "creation": "2024-04-22 11:22:54.447005",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "header_section",
   "creator",
   "lead",
-  "lead_location",
-  "logged_geo_location",
-  "distance",
+  "status",
+  "visit_type",
+  "column_break_header",
   "check_in_time",
   "check_out_time",
   "duration",
+  "off_target",
+  "field_capture_section",
+  "lead_location",
+  "logged_geo_location",
+  "column_break_field",
+  "distance",
+  "check_in_photo",
+  "customer_signature",
+  "expenses_section",
+  "expenses",
+  "total_expense",
+  "service_section",
+  "service_started_at",
+  "service_completed_at",
+  "customer_satisfied",
+  "parts_used",
+  "intel_section",
+  "competitor_findings",
+  "samples_distributed",
+  "feedback_section",
+  "feedback_rating",
+  "feedback_text",
+  "nps_score",
+  "rate_meeting",
+  "context_section",
+  "objective",
+  "day_plan",
+  "visit_stop_row",
+  "column_break_context",
+  "linked_doctype",
+  "linked_name",
+  "notes_section",
   "comment",
-  "rate_meeting"
+  "amended_from"
  ],
  "fields": [
+  {
+   "fieldname": "header_section",
+   "fieldtype": "Section Break",
+   "label": "Visit"
+  },
   {
    "bold": 1,
    "fieldname": "creator",
@@ -34,22 +72,39 @@
    "reqd": 1
   },
   {
-   "fieldname": "logged_geo_location",
-   "fieldtype": "Data",
+   "fieldname": "lead",
+   "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Logged Geo Location",
-   "read_only": 1,
+   "in_standard_filter": 1,
+   "label": "Lead",
+   "options": "Lead",
    "reqd": 1
   },
   {
-   "fieldname": "distance",
-   "fieldtype": "Data",
-   "label": "Distance from Customer in Kilometers",
-   "read_only": 1
+   "default": "Planned",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Planned\nEn route\nChecked in\nCompleted\nNo Show\nCancelled"
+  },
+  {
+   "default": "Sales",
+   "fieldname": "visit_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Visit Type",
+   "options": "Sales\nDemo\nService\nDelivery\nCollection\nSurvey\nOther"
+  },
+  {
+   "fieldname": "column_break_header",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "check_in_time",
-   "fieldtype": "Data",
+   "fieldtype": "Datetime",
    "in_list_view": 1,
    "label": "Check In Time",
    "read_only": 1,
@@ -57,15 +112,202 @@
   },
   {
    "fieldname": "check_out_time",
-   "fieldtype": "Data",
+   "fieldtype": "Datetime",
    "label": "Check Out Time",
    "read_only": 1
   },
   {
    "fieldname": "duration",
-   "fieldtype": "Data",
+   "fieldtype": "Duration",
+   "in_list_view": 1,
    "label": "Duration",
    "read_only": 1
+  },
+  {
+   "default": "0",
+   "description": "Set automatically when the agent checks in too far from the lead's location.",
+   "fieldname": "off_target",
+   "fieldtype": "Check",
+   "label": "Off-target",
+   "read_only": 1
+  },
+  {
+   "fieldname": "field_capture_section",
+   "fieldtype": "Section Break",
+   "label": "Field Capture"
+  },
+  {
+   "fetch_from": "lead.lead_geolocation",
+   "fieldname": "lead_location",
+   "fieldtype": "Geolocation",
+   "label": "Lead Location",
+   "read_only": 1
+  },
+  {
+   "fieldname": "logged_geo_location",
+   "fieldtype": "Geolocation",
+   "label": "Logged Geo Location",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_field",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "meters",
+   "fieldname": "distance",
+   "fieldtype": "Float",
+   "label": "Distance from Lead (meters)",
+   "precision": "1",
+   "read_only": 1
+  },
+  {
+   "fieldname": "check_in_photo",
+   "fieldtype": "Attach Image",
+   "label": "Check-in Photo"
+  },
+  {
+   "fieldname": "customer_signature",
+   "fieldtype": "Signature",
+   "label": "Customer Signature"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "expenses_section",
+   "fieldtype": "Section Break",
+   "label": "Expenses"
+  },
+  {
+   "fieldname": "expenses",
+   "fieldtype": "Table",
+   "label": "Expenses",
+   "options": "Field Visit Expense"
+  },
+  {
+   "fieldname": "total_expense",
+   "fieldtype": "Currency",
+   "label": "Total Expense",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "depends_on": "eval:doc.visit_type === 'Service'",
+   "fieldname": "service_section",
+   "fieldtype": "Section Break",
+   "label": "Service"
+  },
+  {
+   "fieldname": "service_started_at",
+   "fieldtype": "Datetime",
+   "label": "Service Started"
+  },
+  {
+   "fieldname": "service_completed_at",
+   "fieldtype": "Datetime",
+   "label": "Service Completed"
+  },
+  {
+   "default": "0",
+   "fieldname": "customer_satisfied",
+   "fieldtype": "Check",
+   "label": "Customer Satisfied"
+  },
+  {
+   "fieldname": "parts_used",
+   "fieldtype": "Table",
+   "label": "Parts Used",
+   "options": "Field Visit Part"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "intel_section",
+   "fieldtype": "Section Break",
+   "label": "Intel"
+  },
+  {
+   "fieldname": "competitor_findings",
+   "fieldtype": "Table",
+   "label": "Competitor Findings",
+   "options": "Field Visit Competitor Finding"
+  },
+  {
+   "fieldname": "samples_distributed",
+   "fieldtype": "Table",
+   "label": "Samples Distributed",
+   "options": "Field Visit Sample"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "feedback_section",
+   "fieldtype": "Section Break",
+   "label": "Feedback"
+  },
+  {
+   "fieldname": "feedback_rating",
+   "fieldtype": "Rating",
+   "label": "Customer Rating"
+  },
+  {
+   "fieldname": "feedback_text",
+   "fieldtype": "Small Text",
+   "label": "Feedback"
+  },
+  {
+   "depends_on": "eval:['Sales','Service'].includes(doc.visit_type)",
+   "fieldname": "nps_score",
+   "fieldtype": "Int",
+   "label": "NPS (0-10)"
+  },
+  {
+   "fieldname": "rate_meeting",
+   "fieldtype": "Rating",
+   "label": "Agent Self-rating"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "context_section",
+   "fieldtype": "Section Break",
+   "label": "Context"
+  },
+  {
+   "fieldname": "objective",
+   "fieldtype": "Small Text",
+   "label": "Objective"
+  },
+  {
+   "fieldname": "day_plan",
+   "fieldtype": "Link",
+   "label": "Day Plan",
+   "options": "Day Plan",
+   "read_only": 1
+  },
+  {
+   "fieldname": "visit_stop_row",
+   "fieldtype": "Data",
+   "label": "Visit Stop Row",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_context",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "linked_doctype",
+   "fieldtype": "Link",
+   "label": "Linked Doctype",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "linked_name",
+   "fieldtype": "Dynamic Link",
+   "label": "Linked Doc",
+   "options": "linked_doctype"
+  },
+  {
+   "fieldname": "notes_section",
+   "fieldtype": "Section Break",
+   "label": "Notes"
   },
   {
    "fieldname": "comment",
@@ -73,29 +315,19 @@
    "label": "Comment"
   },
   {
-   "fieldname": "rate_meeting",
-   "fieldtype": "Rating",
-   "label": " Rate Meeting"
-  },
-  {
-   "fieldname": "lead",
+   "fieldname": "amended_from",
    "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Lead",
-   "options": "Lead",
-   "reqd": 1
-  },
-  {
-   "fetch_from": "lead.lead_geolocation",
-   "fieldname": "lead_location",
-   "fieldtype": "Data",
-   "label": "Lead Location",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Lead Meet",
+   "print_hide": 1,
    "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2024-05-13 15:55:22.278866",
+ "modified": "2026-04-25 00:00:00.000000",
  "modified_by": "Administrator",
  "module": "Field Sales",
  "name": "Lead Meet",
@@ -103,6 +335,7 @@
  "owner": "Administrator",
  "permissions": [
   {
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -112,11 +345,47 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "cancel": 1,
+   "create": 1,
+   "email": 1,
+   "if_owner": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Field Agent",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Field Operations Manager",
+   "share": 1,
+   "submit": 1,
    "write": 1
   }
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": [],
+ "states": [
+  {"color": "Gray", "title": "Planned"},
+  {"color": "Blue", "title": "En route"},
+  {"color": "Yellow", "title": "Checked in"},
+  {"color": "Green", "title": "Completed"},
+  {"color": "Red", "title": "No Show"},
+  {"color": "Gray", "title": "Cancelled"}
+ ],
  "track_changes": 1
 }
