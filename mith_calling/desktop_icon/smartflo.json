@@ -1,0 +1,21 @@
+{
+    "app": "mith_calling",
+    "creation": "2026-03-02 08:24:10.000000",
+    "docstatus": 0,
+    "doctype": "Desktop Icon",
+    "hidden": 0,
+    "icon_image": "/assets/mith_calling/images/smartflo_logo.png",
+    "icon_type": "App",
+    "idx": 0,
+    "label": "SmartFlo",
+    "link": "/app/smartflo",
+    "link_type": "External",
+    "logo_url": "/assets/mith_calling/images/smartflo_logo.png",
+    "modified": "2026-03-02 08:24:10.000000",
+    "modified_by": "Administrator",
+    "name": "SmartFlo",
+    "owner": "Administrator",
+    "restrict_removal": 0,
+    "roles": [],
+    "standard": 1
+}

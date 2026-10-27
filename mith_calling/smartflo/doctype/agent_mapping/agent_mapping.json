@@ -1,0 +1,102 @@
+{
+    "actions": [],
+    "allow_rename": 1,
+    "autoname": "prompt",
+    "creation": "2026-03-01 02:13:29.622832",
+    "doctype": "DocType",
+    "engine": "InnoDB",
+    "field_order": [
+        "user",
+        "device_type",
+        "smartflo_agent_id",
+        "call_forward_number",
+        "did_number",
+        "hide_field",
+        "test_softphone_call",
+        "test_pstn_call"
+    ],
+    "fields": [
+        {
+            "fieldname": "user",
+            "fieldtype": "Link",
+            "in_list_view": 1,
+            "label": "User",
+            "options": "User",
+            "reqd": 1,
+            "unique": 1
+        },
+        {
+            "default": "Softphone (WebRTC)",
+            "fieldname": "device_type",
+            "fieldtype": "Select",
+            "in_list_view": 1,
+            "label": "Device Routing",
+            "options": "Softphone (WebRTC)\nPSTN (Mobile/Landline)",
+            "reqd": 1
+        },
+        {
+            "description": "Enter your Smartflo Intercom ID / Agent Extension ID (e.g. 1006). This is the auto-generated intercom number shown in the Smartflo agent settings.",
+            "fieldname": "smartflo_agent_id",
+            "fieldtype": "Data",
+            "label": "Agent Extension ID (Intercom ID)"
+        },
+        {
+            "description": "Enter the 10-digit mobile number your Smartflo agent forwards to.",
+            "fieldname": "call_forward_number",
+            "fieldtype": "Phone",
+            "label": "Call Forwarding Number"
+        },
+        {
+            "fieldname": "did_number",
+            "fieldtype": "Phone",
+            "label": "Caller ID"
+        },
+        {
+            "default": "0",
+            "description": "Hide phone number fields visually for this agent on Lead, Customer, Contact, and Opportunity.",
+            "fieldname": "hide_field",
+            "fieldtype": "Check",
+            "label": "Hide field"
+        },
+        {
+            "depends_on": "eval:doc.device_type == 'Softphone (WebRTC)'",
+            "fieldname": "test_softphone_call",
+            "fieldtype": "Button",
+            "label": "Test Softphone (WebRTC) Call"
+        },
+        {
+            "depends_on": "eval:doc.device_type == 'PSTN (Mobile/Landline)'",
+            "fieldname": "test_pstn_call",
+            "fieldtype": "Button",
+            "label": "Test PSTN Call"
+        }
+    ],
+    "grid_page_length": 50,
+    "index_web_pages_for_search": 1,
+    "links": [],
+    "modified": "2026-03-01 14:10:00.000000",
+    "modified_by": "Administrator",
+    "module": "Smartflo",
+    "name": "Agent Mapping",
+    "naming_rule": "Set by user",
+    "owner": "Administrator",
+    "permissions": [
+        {
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "System Manager",
+            "share": 1,
+            "write": 1
+        }
+    ],
+    "row_format": "Dynamic",
+    "rows_threshold_for_grid_search": 20,
+    "sort_field": "creation",
+    "sort_order": "DESC",
+    "states": []
+}

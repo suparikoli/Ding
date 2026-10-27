@@ -1,15 +1,18 @@
 [project]
-name = "ding"
+name = "mith_calling"
 authors = [
-    { name = "manoj", email = "manoj@mith.tech"}
+    { name = "Mithtech Innovative Solutions PVT LTD", email = "manoj@mith.tech"}
 ]
-description = "App for telecalling directly from documents"
+description = "Calling from documents: call and WhatsApp buttons, call logs, and Tata Tele Smartflo as a telephony provider"
 requires-python = ">=3.10"
 readme = "README.md"
 dynamic = ["version"]
 dependencies = [
-    # "frappe~=15.0.0" # Installed and managed by bench.
+    # "frappe~=16.0.0" # Installed and managed by bench.
 ]
+
+[tool.bench.frappe-dependencies]
+frappe = ">=16.0.0,<17.0.0"
 
 [build-system]
 requires = ["flit_core >=3.4,<4"]

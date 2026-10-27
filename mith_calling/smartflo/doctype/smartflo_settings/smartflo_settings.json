@@ -1,0 +1,279 @@
+{
+    "actions": [],
+    "allow_rename": 1,
+    "creation": "2026-03-01 01:40:13.219166",
+    "doctype": "DocType",
+    "engine": "InnoDB",
+    "field_order": [
+        "system_tab",
+        "smartflo_settings_section",
+        "api_token",
+        "webhook_secret",
+        "account_id",
+        "default_caller_id",
+        "column_break_jefw",
+        "test_api_connection",
+        "sync_call_records",
+        "validate_webhook",
+        "dialplan_and_routing_tab",
+        "routing_and_dialplan_section",
+        "dialplan_id",
+        "default_inbound_queue",
+        "column_break_lsbh",
+        "allow_call_transfer",
+        "enable_inbound_calls",
+        "enable_outbound_calls",
+        "call_sync_and_recording_tab",
+        "call_sync_and_recording_section",
+        "enable_webhook_processing",
+        "enable_cdr_sync_fallback",
+        "cdr_sync_frequency_mins",
+        "backfill_last_x_days",
+        "auto_fetch_recordings",
+        "save_recordings_as_file",
+        "auto_dialer_tab",
+        "auto_dialer_section",
+        "enable_auto_dialer",
+        "auto_dial_delay_seconds",
+        "require_disposition_before_next_call",
+        "max_retry_attempts",
+        "logging_and_debug_tab",
+        "logging_and_debugging_section",
+        "enable_debug_logs",
+        "last_cdr_sync_time",
+        "last_webhook_received_at",
+        "last_api_error"
+    ],
+    "fields": [
+        {
+            "fieldname": "system_tab",
+            "fieldtype": "Tab Break",
+            "label": "System"
+        },
+        {
+            "fieldname": "smartflo_settings_section",
+            "fieldtype": "Section Break",
+            "label": "SmartFlo Settings"
+        },
+        {
+            "fieldname": "api_token",
+            "fieldtype": "Password",
+            "label": "API Token",
+            "reqd": 1
+        },
+        {
+            "fieldname": "webhook_secret",
+            "fieldtype": "Password",
+            "label": "Webhook Secret"
+        },
+        {
+            "fieldname": "account_id",
+            "fieldtype": "Data",
+            "label": "Account ID",
+            "reqd": 1
+        },
+        {
+            "fieldname": "default_caller_id",
+            "fieldtype": "Data",
+            "label": "Caller ID (Default)"
+        },
+        {
+            "fieldname": "column_break_jefw",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "test_api_connection",
+            "fieldtype": "Button",
+            "label": "Test API Connection"
+        },
+        {
+            "fieldname": "sync_call_records",
+            "fieldtype": "Button",
+            "label": "Sync Call Records"
+        },
+        {
+            "fieldname": "validate_webhook",
+            "fieldtype": "Button",
+            "label": "Validate Webhook"
+        },
+        {
+            "fieldname": "dialplan_and_routing_tab",
+            "fieldtype": "Tab Break",
+            "label": "Dialplan And Routing"
+        },
+        {
+            "fieldname": "routing_and_dialplan_section",
+            "fieldtype": "Section Break",
+            "label": "Routing and Dialplan"
+        },
+        {
+            "fieldname": "dialplan_id",
+            "fieldtype": "Data",
+            "label": "Dialplan ID"
+        },
+        {
+            "fieldname": "default_inbound_queue",
+            "fieldtype": "Data",
+            "label": "Default Inbound Queue"
+        },
+        {
+            "fieldname": "column_break_lsbh",
+            "fieldtype": "Column Break"
+        },
+        {
+            "default": "0",
+            "fieldname": "allow_call_transfer",
+            "fieldtype": "Check",
+            "label": "Allow Call Transfer"
+        },
+        {
+            "default": "0",
+            "fieldname": "enable_inbound_calls",
+            "fieldtype": "Check",
+            "label": "Enable Inbound Calls"
+        },
+        {
+            "default": "0",
+            "fieldname": "enable_outbound_calls",
+            "fieldtype": "Check",
+            "label": "Enable Outbound Calls"
+        },
+        {
+            "fieldname": "call_sync_and_recording_tab",
+            "fieldtype": "Tab Break",
+            "label": "Call Sync And Recording"
+        },
+        {
+            "fieldname": "call_sync_and_recording_section",
+            "fieldtype": "Section Break",
+            "label": "Call Sync And Recording"
+        },
+        {
+            "default": "0",
+            "fieldname": "enable_webhook_processing",
+            "fieldtype": "Check",
+            "label": "Enable Webhook Processing"
+        },
+        {
+            "default": "0",
+            "fieldname": "enable_cdr_sync_fallback",
+            "fieldtype": "Check",
+            "label": "Enable CDR Sync (Fallback)"
+        },
+        {
+            "fieldname": "cdr_sync_frequency_mins",
+            "fieldtype": "Select",
+            "label": "CDR Sync Frequency (mins)",
+            "options": "5\n10\n15\n30\n45\n60\n120"
+        },
+        {
+            "fieldname": "backfill_last_x_days",
+            "fieldtype": "Int",
+            "label": "Backfill Last X Days"
+        },
+        {
+            "default": "0",
+            "fieldname": "auto_fetch_recordings",
+            "fieldtype": "Check",
+            "label": "Auto Fetch Recordings"
+        },
+        {
+            "default": "0",
+            "fieldname": "save_recordings_as_file",
+            "fieldtype": "Check",
+            "label": "Save Recordings as File"
+        },
+        {
+            "fieldname": "auto_dialer_tab",
+            "fieldtype": "Tab Break",
+            "label": "Auto Dialer"
+        },
+        {
+            "fieldname": "auto_dialer_section",
+            "fieldtype": "Section Break",
+            "label": "Auto Dialer"
+        },
+        {
+            "default": "0",
+            "fieldname": "enable_auto_dialer",
+            "fieldtype": "Check",
+            "label": "Enable Auto Dialer"
+        },
+        {
+            "fieldname": "auto_dial_delay_seconds",
+            "fieldtype": "Int",
+            "label": "Auto Dial Delay (seconds)"
+        },
+        {
+            "default": "0",
+            "fieldname": "require_disposition_before_next_call",
+            "fieldtype": "Check",
+            "label": "Require Disposition Before Next Call"
+        },
+        {
+            "fieldname": "max_retry_attempts",
+            "fieldtype": "Int",
+            "label": "Max Retry Attempts"
+        },
+        {
+            "fieldname": "logging_and_debug_tab",
+            "fieldtype": "Tab Break",
+            "label": "Logging And Debug"
+        },
+        {
+            "fieldname": "logging_and_debugging_section",
+            "fieldtype": "Section Break",
+            "label": "Logging And Debugging"
+        },
+        {
+            "default": "0",
+            "fieldname": "enable_debug_logs",
+            "fieldtype": "Check",
+            "label": "Enable Debug Logs"
+        },
+        {
+            "fieldname": "last_cdr_sync_time",
+            "fieldtype": "Date",
+            "label": "Last CDR Sync Time",
+            "read_only": 1
+        },
+        {
+            "fieldname": "last_webhook_received_at",
+            "fieldtype": "Date",
+            "label": "Last Webhook Received At",
+            "read_only": 1
+        },
+        {
+            "fieldname": "last_api_error",
+            "fieldtype": "Small Text",
+            "label": "Last API Error",
+            "read_only": 1
+        }
+    ],
+    "grid_page_length": 50,
+    "index_web_pages_for_search": 1,
+    "issingle": 1,
+    "links": [],
+    "modified": "2026-03-01 02:05:24.141177",
+    "modified_by": "Administrator",
+    "module": "Smartflo",
+    "name": "Smartflo Settings",
+    "owner": "Administrator",
+    "permissions": [
+        {
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "print": 1,
+            "read": 1,
+            "role": "System Manager",
+            "share": 1,
+            "write": 1
+        }
+    ],
+    "row_format": "Dynamic",
+    "rows_threshold_for_grid_search": 20,
+    "sort_field": "creation",
+    "sort_order": "DESC",
+    "states": []
+}
