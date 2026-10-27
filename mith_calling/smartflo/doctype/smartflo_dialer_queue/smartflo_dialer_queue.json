@@ -1,0 +1,139 @@
+{
+    "actions": [],
+    "autoname": "SDQ-.#####",
+    "creation": "2026-03-01 03:00:00.000000",
+    "doctype": "DocType",
+    "engine": "InnoDB",
+    "field_order": [
+        "target_type",
+        "target_name",
+        "phone_number",
+        "column_break_1",
+        "status",
+        "agent",
+        "priority",
+        "section_break_2",
+        "retry_count",
+        "last_dialed_at",
+        "next_retry_at",
+        "call_log"
+    ],
+    "fields": [
+        {
+            "fieldname": "target_type",
+            "fieldtype": "Link",
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "label": "Target Type",
+            "options": "DocType",
+            "reqd": 1
+        },
+        {
+            "fieldname": "target_name",
+            "fieldtype": "Dynamic Link",
+            "in_list_view": 1,
+            "label": "Target Name",
+            "options": "target_type",
+            "reqd": 1
+        },
+        {
+            "fieldname": "phone_number",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "label": "Phone Number",
+            "reqd": 1
+        },
+        {
+            "fieldname": "column_break_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "default": "Pending",
+            "fieldname": "status",
+            "fieldtype": "Select",
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "label": "Status",
+            "options": "Pending\nDialing\nCompleted\nFailed\nSkipped"
+        },
+        {
+            "fieldname": "agent",
+            "fieldtype": "Link",
+            "in_list_view": 1,
+            "in_standard_filter": 1,
+            "label": "Assigned Agent",
+            "options": "User"
+        },
+        {
+            "default": "Medium",
+            "fieldname": "priority",
+            "fieldtype": "Select",
+            "label": "Priority",
+            "options": "High\nMedium\nLow"
+        },
+        {
+            "fieldname": "section_break_2",
+            "fieldtype": "Section Break",
+            "label": "Dialing Status"
+        },
+        {
+            "default": "0",
+            "fieldname": "retry_count",
+            "fieldtype": "Int",
+            "label": "Retry Count"
+        },
+        {
+            "fieldname": "last_dialed_at",
+            "fieldtype": "Datetime",
+            "label": "Last Dialed At"
+        },
+        {
+            "fieldname": "next_retry_at",
+            "fieldtype": "Datetime",
+            "label": "Next Retry At"
+        },
+        {
+            "fieldname": "call_log",
+            "fieldtype": "Link",
+            "label": "Latest Call Log",
+            "options": "Smartflo Logs"
+        }
+    ],
+    "index_web_pages_for_search": 1,
+    "links": [],
+    "modified": "2026-03-01 03:00:00.000000",
+    "modified_by": "Administrator",
+    "module": "Smartflo",
+    "name": "Smartflo Dialer Queue",
+    "owner": "Administrator",
+    "permissions": [
+        {
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "System Manager",
+            "share": 1,
+            "write": 1
+        },
+        {
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "Sales User",
+            "share": 1,
+            "write": 1
+        }
+    ],
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "states": [],
+    "track_changes": 1
+}
